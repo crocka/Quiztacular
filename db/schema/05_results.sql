@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS results CASCADE;
+CREATE TABLE results (
+  id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER REFERENCES users(id),
+  quiz_id INTEGER REFERENCES quizzes(id) ON DELETE CASCADE,
+  score SMALLINT NOT NULL,
+  started_at TIMESTAMP NOT NULL,
+  completed_at TIMESTAMP NOT NULL,
+);
