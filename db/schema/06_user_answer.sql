@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS user_answers CASCADE;
-CREATE TABLE user_answers (
+DROP TABLE IF EXISTS user_answer CASCADE;
+CREATE TABLE user_answer (
   id SERIAL PRIMARY KEY NOT NULL,
   user_id INTEGER REFERENCES users(id),
   answer_id INTEGER REFERENCES answers(id) ON DELETE CASCADE

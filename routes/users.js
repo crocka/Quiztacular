@@ -21,24 +21,24 @@ module.exports = (db) => {
       });
   };
 
-  router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
-      .then(data => {
-        const users = data.rows;
-        res.json({ users });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
+  // router.get("/", (req, res) => {
+  //   db.query(`SELECT * FROM users;`)
+  //     .then(data => {
+  //       const users = data.rows;
+  //       res.json({ users });
+  //     })
+  //     .catch(err => {
+  //       res
+  //         .status(500)
+  //         .json({ error: err.message });
+  //     });
+  // });
 
     // Create a new user
     router.post('/register', (req, res) => {
       const user = req.body;
       user.password = bcrypt.hashSync(user.password, 12);
-      database.addUser(user)
+      db.addUser(user)
         .then(user => {
           if (!user) {
             res.send({ error: "error" });

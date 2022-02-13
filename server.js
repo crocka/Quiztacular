@@ -41,8 +41,8 @@ const apisRoutes = require("./routes/apis");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/users", usersRoutes(db));
-app.use("/api/widgets", apisRoutes(db));
+app.use("/users", usersRoutes(db));
+app.use("/api", apisRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -51,6 +51,38 @@ app.use("/api/widgets", apisRoutes(db));
 
 app.get("/", (req, res) => {
   res.render("index");
+});
+
+app.get("/quiz/:quizId", (req, res) => {
+
+  const quiz_id = req.params.quizId;
+
+  db.getQuestionsWithQuizId(quiz_id)
+  .then(questions => {
+
+    questions.forEach(x => {
+
+      db.getAnswersWithQuestionId(x.id)
+        .then(answers => {
+          x.answers = answers;
+        })
+    });
+
+    res.send(questions);
+
+  })
+  .catch(err => console.log(err.message));
+
+});
+
+app.get("/results/:resultId", (req, res) => {
+
+  const result_id = req.params.resultId;
+
+  db.getResult(result_id)
+    .then(result => res.send(result))
+    .catch((err) => console.log(err.message));
+
 });
 
 app.listen(PORT, () => {
