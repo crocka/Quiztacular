@@ -5,10 +5,10 @@ $(() => {
   window.views_manager = {};
 
   window.views_manager.show = function(item) {
-    $newQuizForm.detach();
-    $quizList.detach();
-    $registrationForm.detach();
-    $logInForm.detach();
+    // $newQuizForm.detach();
+    // $quizList.detach();
+    // $registrationForm.detach();
+    // $logInForm.detach();
 
     switch (item) {
       case 'quiz_list':
@@ -18,7 +18,7 @@ $(() => {
         $newQuizForm.appendTo($main);
         break;
       case 'registration':
-        $registrationForm.appendTo($main);
+        $signUpForm.appendTo($main);
         break;
       case 'logIn':
         $logInForm.appendTo($main);

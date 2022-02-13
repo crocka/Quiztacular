@@ -13,8 +13,8 @@ $(() => {
       userLinks = `
       <nav id="page-header__user-links" class="page-header__user-links">
         <ul>
-          <li class="login_button">Log In</li>
-          <li class="sign-up_button">Sign Up</li>
+          <button type="button" class="login_button">Log In</button>
+          <button type="button" class="sign-up_button">Sign Up</button>
         </ul>
       </nav>
       `
@@ -42,31 +42,34 @@ $(() => {
       updateHeader(json.user);
     });
 
-  $('.login_button').click(function() {
+    $("header").on('click', '.login_button', () => {
+    console.log('clicked')
+    views_manager.show('logIn');
 
     //slidown login_form
     $('#login_form').is(':hidden') ? $('#login_form').slideDown() : $('#login_form').slideUp();
 
   });
 
-  $('.sign-up_button').click(function() {
-
+  $("header").on('click', '.sign-up_button', () => {
+    console.log('clicked')
+    views_manager.show('registration');
     //slidown sign-up_form
     $('#signup_form').is(':hidden') ? $('#signup_form').slideDown() : $('#signup_form').slideUp();
 
   });
 
-  $('.create_quiz_button').click(function() {
+  $("header").on('click', '.create_quiz_button', () => {
 
     //show create quiz form
   });
 
-  $('.my_quizzes_button').click(function() {
+  $("header").on('click', '.my_quizzes_button', () => {
 
     //show quiz list
   });
 
-  $('.logout_button').click(function() {
+  $("header").on('click', '.logout_button', () => {
     logOut().then(() => {
       header.update(null);
     });
