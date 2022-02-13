@@ -2,5 +2,5 @@ DROP TABLE IF EXISTS user_answers CASCADE;
 CREATE TABLE user_answers (
   id SERIAL PRIMARY KEY NOT NULL,
   user_id INTEGER REFERENCES users(id),
-  answer_id INTEGER REFERENCES answers(id) ON DELETE CASCADE,
+  answer_id INTEGER REFERENCES answers(id) ON DELETE CASCADE
 );

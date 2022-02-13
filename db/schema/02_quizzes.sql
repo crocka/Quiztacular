@@ -7,6 +7,6 @@ CREATE TABLE quizzes (
   is_Hidden BOOLEAN DEFAULT FALSE,
   title TEXT NOT NULL,
   level_of_difficulty SMALLINT NOT NULL,
-  subject VARCHAR(225) DEFAULT general,
-  description TEXT NOT NULL,
+  subject VARCHAR(225) DEFAULT 'general',
+  description TEXT NOT NULL
 );

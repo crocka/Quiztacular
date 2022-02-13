@@ -5,5 +5,5 @@ CREATE TABLE results (
   quiz_id INTEGER REFERENCES quizzes(id) ON DELETE CASCADE,
   score SMALLINT NOT NULL,
   started_at TIMESTAMP NOT NULL,
-  completed_at TIMESTAMP NOT NULL,
+  completed_at TIMESTAMP NOT NULL
 );
