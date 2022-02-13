@@ -44,6 +44,7 @@ module.exports = (db) => {
   // Create a new user
   router.post('/register', (req, res) => {
     const user = req.body;
+    console.log(user)
     user.password = bcrypt.hashSync(user.password, 12);
     db.addUser(user)
       .then(user => {
