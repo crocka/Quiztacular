@@ -29,3 +29,10 @@ function getAllQuizzes(data) {
     data
   });
 }
+
+function getMyDetails() {
+  console.log("getMyDetails");
+  return $.ajax({
+    url: "/users/me",
+  });
+}
