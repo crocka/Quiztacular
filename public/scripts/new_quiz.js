@@ -7,7 +7,7 @@ $(() => {
 
     return `
 
-    <article class="individual answer_wrapper>
+    <article class="individual answer_wrapper">
       <input type="text" name="question_answer" placeholder="Enter the answer to the question">
 
       <input type="checkbox" id="answer_is_correct" name="answer_is_correct" value="True">
@@ -28,7 +28,7 @@ $(() => {
         <input type="text" name="question_answer" placeholder="Enter the answer to the question">
 
         <input type="checkbox" id="answer_is_correct" name="answer_is_correct" value="True">
-        <label for="answer_is_correct">Correct answer</label><br></br>
+        <label>Correct answer</label><br></br>
      </article>
 
     </div>
@@ -84,7 +84,7 @@ $(() => {
               <input type="text" name="question_answer" placeholder="Enter the answer to the question">
 
               <input type="checkbox" id="answer_is_correct" name="answer_is_correct" value="True">
-              <label for="answer_is_correct">Correct answer</label><br></br>
+              <label>Correct answer</label><br></br>
            </article>
 
           </div>
