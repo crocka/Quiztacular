@@ -2,7 +2,7 @@ require("dotenv").config();
 const PORT = process.env.PORT || 3000;
 const express = require('express');
 const { user } = require('pg/lib/defaults');
-const router  = express.Router();
+const router = express.Router();
 
 module.exports = (db) => {
 
@@ -24,7 +24,7 @@ module.exports = (db) => {
   // });
 
   // all quizzes for main page
-  router.get('/',(req, res) => {
+  router.get('/', (req, res) => {
 
     db.getAllQuizzes()
       .then(data => res.send(data))
@@ -57,9 +57,9 @@ module.exports = (db) => {
 
     answers.forEach(x => {
 
-      db.addUserAnswer(user_id,x)
-      .then(data => res.send(data))
-      .catch(err => console.log(err.message));
+      db.addUserAnswer(user_id, x)
+        .then(data => res.send(data))
+        .catch(err => console.log(err.message));
 
     });
   });
@@ -74,7 +74,7 @@ module.exports = (db) => {
 
     const quiz = {
 
-      "user_id":user_id,
+      "user_id": user_id,
       "title": data.quiz_title,
       "isHidden": data.quiz_isHidden ? false : true,
       "level_of_difficulty": Number(data.quiz_level_of_difficulty),
@@ -83,7 +83,7 @@ module.exports = (db) => {
 
     };
 
-    const questions = [];
+    let questions = [];
 
 
 
@@ -94,23 +94,29 @@ module.exports = (db) => {
         res.send(data);
 
       })
+      .then(() => {
+
+        console.log(data.question_title);
+
+        for (let i = 0; i < data.question_title.length; i++) {
+
+          questions.push({
+            quiz_id: quiz_id,
+            title: data.question_title[i],
+          });
+
+        };
+
+        console.log('hi:' + questions)
+
+        questions.forEach(x => {
+          db.addQuestion(x)
+            .then(data => res.send(data))
+            .catch(err => console.log(err.message));
+
+        });
+      })
       .catch(err => console.log(err.message));
-
-    for(const i = 0; i < data.question_title; i++) {
-        questions[i] = {
-        quiz_id: quiz_id,
-        title: data.question_title[i],
-      };
-
-    };
-
-
-    questions.forEach(x => {
-      db.addQuestion(x)
-      .then(data => res.send(data))
-      .catch(err => console.log(err.message));
-
-    });
 
     // answers.forEach(x => {
     //   db.addAnswer(x)
