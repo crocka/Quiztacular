@@ -62,6 +62,9 @@ $(() => {
   $("header").on('click', '.create_quiz_button', () => {
 
     //show create quiz form
+
+    views_manager.show('new_quiz');
+
   });
 
   $("header").on('click', '.my_quizzes_button', () => {

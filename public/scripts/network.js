@@ -36,3 +36,12 @@ function getMyDetails() {
     url: "/users/me",
   });
 }
+
+const createQuiz = function(data) {
+  console.log(data);
+  return $.ajax({
+    method: "POST",
+    url: "/api/newQuiz",
+    data,
+  });
+}
