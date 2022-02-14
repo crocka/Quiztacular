@@ -101,22 +101,22 @@ $(() => {
       </div>
 
       <div class="new-quiz-form__field-wrapper">
-        <button class="new-quiz-form_create>Create!</button>
+        <a button class="new-quiz-form_create>Create!</a>
         <a button type="button" id="new-quiz-form_cancel "href="#">Cancel</a>
       </div>
   `);
 
   window.$newQuizForm = $newQuizForm;
 
-  // $newQuizForm.on('submit', function (event) {
+  $newQuizForm.on('submit', function (event) {
 
-  //   event.preventDefault();
+    event.preventDefault();
 
-  //   const data = $(this).serialize();
-
-  //   createQuiz(data)
-  //     .then()
-  // });
+    const data = $(this).serialize();
+    console.log(data)
+    createQuiz(data)
+      .then()
+  });
 
   $('body').on("click",".add_answer", function (event) {
     event.preventDefault();
