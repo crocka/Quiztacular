@@ -1,6 +1,8 @@
 $(() => {
   //whether private/public, title, level_of_difficulty, subject-drop down list, description
 
+  let question_number = 0;
+
   const createAnswerElement = function () {
 
     return `
@@ -17,10 +19,10 @@ $(() => {
 
   const createQuestionElement = function () {
     return `
-    <article class="individual_question">
+    <article class="individual_question" id='question${question_number}'>
     <input type="text" name="question_title" placeholder="Enter your question here">
 
-    <div class="individual_answer>
+    <div class="individual_answer">
 
      <article class="individual answer_wrapper">
         <input type="text" name="question_answer" placeholder="Enter the answer to the question">
@@ -73,10 +75,10 @@ $(() => {
 
       <div class="question_list">
 
-        <article class="individual_question">
+        <article class="individual_question" id='question${question_number}'>
           <input type="text" name="question_title" placeholder="Enter your question here">
 
-          <div class="individual_answer>
+          <div class="individual_answer">
 
            <article class="individual answer_wrapper">
               <input type="text" name="question_answer" placeholder="Enter the answer to the question">
@@ -117,16 +119,18 @@ $(() => {
   // });
 
   $('body').on("click",".add_answer", function (event) {
-    // event.preventDefault();
-    console.log('asdf')
+    event.preventDefault();
+    console.log($(this).closest('.individual_question').attr('id'))
 
-    $('.individual_answer').append(createAnswerElement());
+    $(`#${$(this).closest('.individual_question').attr('id')} .individual_answer`).append(createAnswerElement());
 
   });
 
   $('body').on("click", ".add_question", function (event) {
-    // event.preventDefault();
-    console.log('asdf')
+    event.preventDefault();
+
+    question_number++;
+    console.log(question_number)
     $('.question_list').append(createQuestionElement());
 
   });
