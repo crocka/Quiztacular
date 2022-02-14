@@ -10,7 +10,8 @@ $(() => {
     <article class="individual answer_wrapper">
       <input type="text" name="question${question_number}_answer" placeholder="Enter the answer to the question">
 
-      <input type="checkbox" id="answer_is_correct" name="answer_is_correct" value="True">
+      <input type="hidden" id="answer_is_correct" name="question${question_number}answer_is_correct" value="False">
+      <input type="checkbox" id="answer_is_correct" name="question${question_number}answer_is_correct" value="True">
       <label>Correct answer</label><br></br>
     </article>
 
@@ -27,7 +28,7 @@ $(() => {
      <article class="individual answer_wrapper">
         <input type="text" name="question${question_number}_answer" placeholder="Enter the answer to the question">
 
-        <input type="checkbox" id="answer_is_correct" name="answer_is_correct" value="True">
+        <input type="checkbox" id="answer_is_correct" name="question${question_number}answer_is_correct" value="True">
         <label>Correct answer</label><br></br>
      </article>
 
@@ -56,22 +57,23 @@ $(() => {
       <label>Do you want your quiz to be private?</label><br></br>
 
       <div class="dropdown">
-        <button class="dropbtn">Set difficulty level</button>
-        <div class="dropdown-difficulty">
-          <a href="#">1 - Easy</a>
-          <a href="#">2 - Medium</a>
-          <a href="#">3 - Hard</a>
-        </div>
+        <label class="dropbtn">Set difficulty level</label>
+        <select class="dropdown-difficulty"  id='quiz_level_of_difficulty' name='quiz_level_of_difficulty'>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+        </select>
       </div>
 
       <div class="dropdown">
-        <button class="dropbtn">Subject</button>
-        <div class="dropdown-content">
-          <a href="#">Math</a>
-          <a href="#">Biology</a>
-          <a href="#">Chemistry</a>
-        </div>
+        <label class="dropbtn">Subject</label>
+        <select class="dropdown-subject" id='quiz_subject' name='quiz_subject'>
+          <option>Math</option>
+          <option>Biology</option>
+          <option>Chemistry</option>
+        </select>
       </div>
+
 
       <div class="question_list">
         <article class="individual_question" id='question${question_number}'>
@@ -82,7 +84,8 @@ $(() => {
            <article class="individual answer_wrapper">
               <input type="text" name="question${question_number}_answer" placeholder="Enter the answer to the question">
 
-              <input type="checkbox" id="answer_is_correct" name="answer_is_correct" value="True">
+              <input type="hidden" id="answer_is_correct" name="question${question_number}answer_is_correct" value="False">
+              <input type="checkbox" id="answer_is_correct" name="question${question_number}answer_is_correct" value="True">
               <label>Correct answer</label><br></br>
            </article>
 
@@ -105,6 +108,11 @@ $(() => {
       </div>
   `);
 
+  // const organizeData = function(){
+
+
+  // };
+
   window.$newQuizForm = $newQuizForm;
 
   $(".answer_is_correct").on('change', function() {
@@ -115,12 +123,26 @@ $(() => {
     }
   });
 
+  $('#quiz_level_of_difficulty').on('change', function() {
+
+    $(this).val($('.dropdown-difficulty').val());
+
+  });
+
+  $('#quiz_subject').on('change', function() {
+
+    $(this).val($('.dropdown-subject').val());
+
+  });
+
+
   $newQuizForm.on('submit', function (event) {
 
     event.preventDefault();
 
     console.log($(this));
     const data = $(this).serialize();
+    console.log($(this).val());
     console.log(data)
     createQuiz(data)
       .then()

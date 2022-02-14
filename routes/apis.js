@@ -1,3 +1,5 @@
+require("dotenv").config();
+const PORT = process.env.PORT || 3000;
 const express = require('express');
 const { user } = require('pg/lib/defaults');
 const router  = express.Router();
@@ -66,21 +68,49 @@ module.exports = (db) => {
   router.post('/newQuiz', (req, res) => {
 
     console.log(req);
+    let quiz_id;
     const user_id = req.session.userId;
-    const quiz = req.body.quiz; //one quiz object
-    const questions = req.body.questions; // array of quesions object
-    const answers = req.body.answers; //array of answers object
+    const data = req.body; //one quiz object
 
-    // db.addQuiz(quiz)
-    //   .then(data => res.send(data))
-    //   .catch(err => console.log(err.message));
+    const quiz = {
 
-    // questions.forEach(x => {
-    //   db.addQuestion(x)
-    //   .then(data => res.send(data))
-    //   .catch(err => console.log(err.message));
+      "user_id":user_id,
+      "title": data.quiz_title,
+      "isHidden": data.quiz_isHidden ? false : true,
+      "level_of_difficulty": Number(data.quiz_level_of_difficulty),
+      "subject": data.quiz_subject,
+      "description": data.quiz_description
 
-    // });
+    };
+
+    const questions = [];
+
+
+
+    db.addQuiz(quiz)
+      .then(data => {
+
+        quiz_id = data.id;
+        res.send(data);
+
+      })
+      .catch(err => console.log(err.message));
+
+    for(const i = 0; i < data.question_title; i++) {
+        questions[i] = {
+        quiz_id: quiz_id,
+        title: data.question_title[i],
+      };
+
+    };
+
+
+    questions.forEach(x => {
+      db.addQuestion(x)
+      .then(data => res.send(data))
+      .catch(err => console.log(err.message));
+
+    });
 
     // answers.forEach(x => {
     //   db.addAnswer(x)
