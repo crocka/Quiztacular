@@ -116,16 +116,16 @@ $(() => {
   //     .then()
   // });
 
-  $('.add_answer').on('submit', function (event) {
-    event.preventDefault();
+  $('body').on("click",".add_answer", function (event) {
+    // event.preventDefault();
     console.log('asdf')
 
     $('.individual_answer').append(createAnswerElement());
 
   });
 
-  $('.add_question').on('submit', function (event) {
-    event.preventDefault();
+  $('body').on("click", ".add_question", function (event) {
+    // event.preventDefault();
     console.log('asdf')
     $('.question_list').append(createQuestionElement());
 
