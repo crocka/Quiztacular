@@ -65,28 +65,29 @@ module.exports = (db) => {
   // update quiz in creating new quizzes
   router.post('/newQuiz', (req, res) => {
 
+    console.log(req);
     const user_id = req.session.userId;
     const quiz = req.body.quiz; //one quiz object
     const questions = req.body.questions; // array of quesions object
     const answers = req.body.answers; //array of answers object
 
-    db.addQuiz(quiz)
-      .then(data => res.send(data))
-      .catch(err => console.log(err.message));
+    // db.addQuiz(quiz)
+    //   .then(data => res.send(data))
+    //   .catch(err => console.log(err.message));
 
-    questions.forEach(x => {
-      db.addQuestion(x)
-      .then(data => res.send(data))
-      .catch(err => console.log(err.message));
+    // questions.forEach(x => {
+    //   db.addQuestion(x)
+    //   .then(data => res.send(data))
+    //   .catch(err => console.log(err.message));
 
-    });
+    // });
 
-    answers.forEach(x => {
-      db.addAnswer(x)
-      .then(data => res.send(data))
-      .catch(err => console.log(err.message));
+    // answers.forEach(x => {
+    //   db.addAnswer(x)
+    //   .then(data => res.send(data))
+    //   .catch(err => console.log(err.message));
 
-    });
+    // });
 
   });
 

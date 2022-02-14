@@ -8,10 +8,10 @@ $(() => {
     return `
 
     <article class="individual answer_wrapper">
-      <input type="text" name="question_answer" placeholder="Enter the answer to the question">
+      <input type="text" name="question${question_number}_answer" placeholder="Enter the answer to the question">
 
       <input type="checkbox" id="answer_is_correct" name="answer_is_correct" value="True">
-      <label for="answer_is_correct">Correct answer</label><br></br>
+      <label>Correct answer</label><br></br>
     </article>
 
     `;
@@ -25,7 +25,7 @@ $(() => {
     <div class="individual_answer">
 
      <article class="individual answer_wrapper">
-        <input type="text" name="question_answer" placeholder="Enter the answer to the question">
+        <input type="text" name="question${question_number}_answer" placeholder="Enter the answer to the question">
 
         <input type="checkbox" id="answer_is_correct" name="answer_is_correct" value="True">
         <label>Correct answer</label><br></br>
@@ -53,7 +53,7 @@ $(() => {
       </div>
 
       <input type="checkbox" id="quiz_isHidden" name="quiz_isHidden" value="True">
-      <label for="quiz_isHidden">Do you want your quiz to be private?</label><br></br>
+      <label>Do you want your quiz to be private?</label><br></br>
 
       <div class="dropdown">
         <button class="dropbtn">Set difficulty level</button>
@@ -74,14 +74,13 @@ $(() => {
       </div>
 
       <div class="question_list">
-
         <article class="individual_question" id='question${question_number}'>
           <input type="text" name="question_title" placeholder="Enter your question here">
 
           <div class="individual_answer">
 
            <article class="individual answer_wrapper">
-              <input type="text" name="question_answer" placeholder="Enter the answer to the question">
+              <input type="text" name="question${question_number}_answer" placeholder="Enter the answer to the question">
 
               <input type="checkbox" id="answer_is_correct" name="answer_is_correct" value="True">
               <label>Correct answer</label><br></br>
@@ -101,17 +100,26 @@ $(() => {
       </div>
 
       <div class="new-quiz-form__field-wrapper">
-        <a button class="new-quiz-form_create>Create!</a>
-        <a button type="button" id="new-quiz-form_cancel "href="#">Cancel</a>
+        <button type="submit" id="new-quiz-form_create">Create!</button>
+        <a id="new-quiz-form_cancel" href="#">Cancel</a>
       </div>
   `);
 
   window.$newQuizForm = $newQuizForm;
 
+  $(".answer_is_correct").on('change', function() {
+    if ($(this).is(':checked')) {
+      $(this).attr('value', 'true');
+    } else {
+      $(this).attr('value', 'false');
+    }
+  });
+
   $newQuizForm.on('submit', function (event) {
 
     event.preventDefault();
 
+    console.log($(this));
     const data = $(this).serialize();
     console.log(data)
     createQuiz(data)
@@ -136,7 +144,6 @@ $(() => {
   });
 
   $('body').on('click', '#new-quiz-form_cancel', function () {
-    console.log('asdf')
     views_manager.show('quiz_list');
     return false;
   });

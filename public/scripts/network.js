@@ -38,7 +38,7 @@ function getMyDetails() {
 }
 
 const createQuiz = function(data) {
-  console.log(data);
+  // console.log(data);
   return $.ajax({
     method: "POST",
     url: "/api/newQuiz",
