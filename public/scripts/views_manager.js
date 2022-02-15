@@ -23,6 +23,8 @@ $(() => {
       case 'logIn':
         $logInForm.appendTo($main);
         break;
+      case 'quiz':
+        $quiz.appendTo($main);
       case 'error': {
         const $error = $(`<p>${arguments[1]}</p>`);
         $error.appendTo('body');

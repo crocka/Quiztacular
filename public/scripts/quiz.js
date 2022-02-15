@@ -13,9 +13,12 @@ $(() => {
       <body>${quiz.description}</body>
 
       <
-      <footer>
+      <footer class='quiz_box_footer'>
       <p>${quiz.created_at}</p>
       <p>${quiz.lever_of_difficulty}</p>
+      <form action='/quiz/:quizId'>
+        <input type='submit' value='Start'>
+      </form>
       </footer>
 
     </article>

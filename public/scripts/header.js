@@ -12,6 +12,7 @@ $(() => {
     if (!user) {
       userLinks = `
       <nav id="page-header__user-links" class="page-header__user-links">
+      <span class='logo'>Quiztacular</span>
         <ul>
           <button type="button" class="login_button">Log In</button>
           <button type="button" class="sign-up_button">Sign Up</button>
@@ -21,11 +22,12 @@ $(() => {
     } else {
       userLinks = `
       <nav id="page-header__user-links" class="page-header__user-links">
+      <span class='logo'>Quiztacular</span>
         <ul>
           <li>${user.name}</li>
-          <li class="create_quiz_button">Create Quiz</li>
-          <li class="my_quizzes_button">My Quizzes</li>
-          <li class="logout_button">Log Out</li>
+          <button type='button' class="create_quiz_button">Create Quiz</button>
+          <type='button' class="my_quizzes_button">My Quizzes</button>
+          <type='button' class="logout_button">Log Out</button>
         </ul>
       </nav>
       `
