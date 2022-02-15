@@ -1,17 +1,45 @@
 #page-header__user-links {
-  color: white;
-  background-color: grey;
+  color: #FFFFFF;
+  background-color: pink;
+  height: 120px;
   display: flex;
   justify-content: space-between;
   z-index: 100;
   position: fixed;
-  width: 100%;
-  height: 100px;
+  top: 0;
+  width: 50%
 }
 
 span.logo {
   font-family: 'Orbitron';
   margin: 1.5 em;
+  padding-left: 50px;
   display: flex;
   align-self: center;
 }
+
+.buttons {
+  margin-right: 1.5em;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+
+#sign-up-form {
+  margin-top: 100px;
+}
+
+#login-form {
+  margin-top: 150px;
+}
+// background-color: #69a794;
+// background-image: url('/images/arches.png');
+// height: 120px;
+// display: flex;
+// justify-content: space-between;
+// padding-left:1.5em;
+// padding-right:1.5em;
+// color: #FFFFFF;
+// position: fixed; /* Set the navbar to fixed position */
+// top: 0; /* Position the navbar at the top of the page */
+// width: 100%;

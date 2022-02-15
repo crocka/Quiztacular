@@ -163,6 +163,53 @@ module.exports = (db) => {
 
   });
 
+  router.get("/quiz/:quizId", (req, res) => {
+
+    const quiz_id = req.params.quizId;
+    let questionsArray = [];
+    // let answersArray = {};
+    // let quiz;
+
+    db.getQuizWithQuizId(quiz_id)
+      .then(q => {
+        const quiz = q
+
+        db.getQuestionsWithQuizId(quiz_id)
+          .then(questions => {
+
+            questionsArray = questions;
+            console.log('qA' + questionsArray)
+            let promisesArray = [];
+
+            for (let x of questions) {
+
+              promisesArray.push(db.getAnswersWithQuestionId(x.id));
+              // .then(answers => {
+              //   // console.log(answers)
+              //   // x.answers = answers;
+              //   // answersArray.push(answers);
+              //   answersArray[`question${x.id}`] = answers;
+              //   // console.log(answersArray[`question${x.id}`]);
+              //   // res.send({questions, answers});
+
+              // })
+            }
+
+            Promise.all(promisesArray).then((values) => {
+
+              res.send({ "quiz": quiz, "questions": questionsArray, "answers": values });
+
+            });
+
+          })
+
+      })
+      .catch(err => console.log(err.message));
+
+    // setTimeout(() => {res.send({ "questions": questionsArray, "answers": answersArray })}, 1000);
+
+  });
+
   return router;
 };
 

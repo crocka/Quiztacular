@@ -30,11 +30,11 @@ function getAllQuizzes(data) {
   });
 }
 
-function getQuiz() {
+function getQuiz(quizId) {
 
   return $.ajax({
     method: "GET",
-    url: "/quiz/:quizId",
+    url: `/api/quiz/${quizId}`,
   });
 }
 

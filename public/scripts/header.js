@@ -26,8 +26,8 @@ $(() => {
         <ul>
           <li>${user.name}</li>
           <button type='button' class="create_quiz_button">Create Quiz</button>
-          <type='button' class="my_quizzes_button">My Quizzes</button>
-          <type='button' class="logout_button">Log Out</button>
+          <button type='button' class="my_quizzes_button">My Quizzes</button>
+          <button type='button' class="logout_button">Log Out</button>
         </ul>
       </nav>
       `
