@@ -67,7 +67,7 @@ module.exports = (db) => {
   // update quiz in creating new quizzes
   router.post('/newQuiz', (req, res) => {
 
-    console.log(req);
+    console.log(req.body);
     let quiz_id;
     const user_id = req.session.userId;
     const data = req.body; //one quiz object
@@ -77,12 +77,13 @@ module.exports = (db) => {
 
       "user_id": user_id,
       "title": data.quiz_title,
-      "isHidden": data.quiz_isHidden ? false : true,
+      "is_Hidden": data.quiz_isHidden ? true : false,
       "level_of_difficulty": Number(data.quiz_level_of_difficulty),
       "subject": data.quiz_subject,
       "description": data.quiz_description
 
     };
+    // console.log("hiddendata " +data.quiz_isHidden)
 
     db.addQuiz(quiz)
       .then(data => {
@@ -111,9 +112,7 @@ module.exports = (db) => {
 
               for (let j = 0; j < data[`question${i}_answer`].length; j++) {
 
-                let answerCorrectArray = data[`question${i}answer_is_correct`];
-
-                i === 0 ? answerCorrectArray = answerCorrectArray.slice(1) : '';
+                let answerCorrectArray = data[`question${i}answer_is_correct`].slice(1);
 
                 let answer = {
                   "question_id": question_id,
@@ -121,6 +120,9 @@ module.exports = (db) => {
                   "is_correct": answerCorrectArray[j]
                 };
 
+                // console.log(answer.question_id)
+                // console.log(answer.title)
+                // console.log(answer.is_correct)
                 db.addAnswer(answer);
 
               };

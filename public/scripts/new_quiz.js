@@ -3,15 +3,15 @@ $(() => {
 
   let question_number = 0;
 
-  const createAnswerElement = function () {
+  const createAnswerElement = function (question_num) {
 
     return `
 
     <article class="individual answer_wrapper">
-      <input type="text" name="question${question_number}_answer" placeholder="Enter the answer to the question">
+      <input type="text" name="question${question_num}_answer" placeholder="Enter the answer to the question">
 
-      <input type="hidden" id="answer_is_correct" name="question${question_number}answer_is_correct" value="False">
-      <input type="checkbox" id="answer_is_correct" name="question${question_number}answer_is_correct" value="True">
+      <input type="hidden" id="answer_is_correct" name="question${question_num}answer_is_correct" value="False">
+      <input type="checkbox" id="answer_is_correct" name="question${question_num}answer_is_correct" value="True">
       <label>Correct answer</label><br></br>
     </article>
 
@@ -20,7 +20,7 @@ $(() => {
 
   const createQuestionElement = function () {
     return `
-    <article class="individual_question" id='question${question_number}'>
+    <article class="individual_question" id='${question_number}'>
     <input type="text" name="question_title" placeholder="Enter your question here">
 
     <div class="individual_answer">
@@ -28,6 +28,7 @@ $(() => {
      <article class="individual answer_wrapper">
         <input type="text" name="question${question_number}_answer" placeholder="Enter the answer to the question">
 
+        <input type="hidden" id="answer_is_correct" name="question${question_number}answer_is_correct" value="False">
         <input type="checkbox" id="answer_is_correct" name="question${question_number}answer_is_correct" value="True">
         <label>Correct answer</label><br></br>
      </article>
@@ -76,7 +77,7 @@ $(() => {
 
 
       <div class="question_list">
-        <article class="individual_question" id='question${question_number}'>
+        <article class="individual_question" id='${question_number}'>
           <input type="text" name="question_title" placeholder="Enter your question here">
 
           <div class="individual_answer">
@@ -132,9 +133,13 @@ $(() => {
 
   $('body').on("click",".add_answer", function (event) {
     event.preventDefault();
-    console.log($(this).parent('.individual_question').attr('id'))
+    // console.log($(this).parent('.individual_question').attr('id'))
 
-    $(`#${$(this).parent('.individual_question').attr('id')} .individual_answer`).append(createAnswerElement());
+    const question_num = $(this).parent('.individual_question').attr('id');
+
+    console.log('this is:' + question_num)
+
+    $(`#${question_num} .individual_answer`).append(createAnswerElement(question_num));
 
   });
 
@@ -156,10 +161,10 @@ $(() => {
 
     event.preventDefault();
 
-    console.log($(this));
+    // console.log($(this));
     const data = $(this).serialize();
-    console.log($(this).val());
-    console.log(data)
+    // console.log($(this).val());
+    // console.log(data)
     createQuiz(data)
       .then()
   });
