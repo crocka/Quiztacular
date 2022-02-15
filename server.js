@@ -60,6 +60,11 @@ app.get("/", (req, res) => {
 app.get("/quiz/:quizId", (req, res) => {
 
   const quiz_id = req.params.quizId;
+  const questionsArray = [];
+  const answersArray = [];
+  let quiz;
+
+  db.getQuizWithQuizId(quiz_id).then(q => quiz = q);
 
   db.getQuestionsWithQuizId(quiz_id)
   .then(questions => {
@@ -68,11 +73,14 @@ app.get("/quiz/:quizId", (req, res) => {
 
       db.getAnswersWithQuestionId(x.id)
         .then(answers => {
-          x.answers = answers;
+          // x.answers = answers;
+          answersArray.push(answers);
+          // res.send({questions, answers});
         })
     });
 
-    res.send(questions);
+    questionsArray = questions;
+    res.send({"questions": questionsArray, "answers":answersArray});
 
   })
   .catch(err => console.log(err.message));

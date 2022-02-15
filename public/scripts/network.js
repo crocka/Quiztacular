@@ -30,6 +30,14 @@ function getAllQuizzes(data) {
   });
 }
 
+function getQuiz() {
+
+  return $.ajax({
+    method: "GET",
+    url: "/quiz/:quizId",
+  });
+}
+
 function getMyDetails() {
   console.log("getMyDetails");
   return $.ajax({
