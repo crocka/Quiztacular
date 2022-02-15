@@ -1,5 +1,5 @@
 require("dotenv").config();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 const express = require('express');
 const { user } = require('pg/lib/defaults');
 const router = express.Router();
@@ -71,6 +71,7 @@ module.exports = (db) => {
     let quiz_id;
     const user_id = req.session.userId;
     const data = req.body; //one quiz object
+    // let questions = [];
 
     const quiz = {
 
@@ -83,10 +84,6 @@ module.exports = (db) => {
 
     };
 
-    let questions = [];
-
-
-
     db.addQuiz(quiz)
       .then(data => {
 
@@ -96,34 +93,71 @@ module.exports = (db) => {
       })
       .then(() => {
 
-        console.log(data.question_title);
-
         for (let i = 0; i < data.question_title.length; i++) {
 
-          questions.push({
-            quiz_id: quiz_id,
-            title: data.question_title[i],
-          });
+          // console.log('hi:' + data.question_title[i]);
+
+          let question = {
+            "quiz_id": quiz_id,
+            "title": data.question_title[i]
+          };
+
+          // console.log('hi2:' + question);
+
+          db.addQuestion(question)
+            .then(question => {
+
+              let question_id = question.id;
+
+              for (let j = 0; j < data[`question${i}_answer`].length; j++) {
+
+                let answerCorrectArray = data[`question${i}answer_is_correct`];
+
+                i === 0 ? answerCorrectArray = answerCorrectArray.slice(1) : '';
+
+                let answer = {
+                  "question_id": question_id,
+                  "title": data[`question${i}_answer`][j],
+                  "is_correct": answerCorrectArray[j]
+                };
+
+                db.addAnswer(answer);
+
+              };
+
+
+            })
 
         };
 
-        console.log('hi:' + questions)
-
-        questions.forEach(x => {
-          db.addQuestion(x)
-            .then(data => res.send(data))
-            .catch(err => console.log(err.message));
-
-        });
       })
-      .catch(err => console.log(err.message));
+      .catch(err => console.log('1234:' + err.message));
 
     // answers.forEach(x => {
-    //   db.addAnswer(x)
+    //
     //   .then(data => res.send(data))
     //   .catch(err => console.log(err.message));
 
     // });
+
+    // .then(() => {
+
+    //   for (let i = 0; i < data.question_title.length; i++) {
+
+    //     // console.log('hi:' + data.question_title[i]);
+
+    //     let answer = {
+    //       "question_id": quiz_id,
+    //       "title": data.question_title[i]
+    //     };
+
+    //     // console.log('hi2:' + question);
+
+    //     db.addAnswer(answer);
+
+    //   };
+
+    // })
 
   });
 

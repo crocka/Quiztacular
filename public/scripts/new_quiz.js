@@ -108,11 +108,6 @@ $(() => {
       </div>
   `);
 
-  // const organizeData = function(){
-
-
-  // };
-
   window.$newQuizForm = $newQuizForm;
 
   $(".answer_is_correct").on('change', function() {
@@ -135,6 +130,27 @@ $(() => {
 
   });
 
+  $('body').on("click",".add_answer", function (event) {
+    event.preventDefault();
+    console.log($(this).parent('.individual_question').attr('id'))
+
+    $(`#${$(this).parent('.individual_question').attr('id')} .individual_answer`).append(createAnswerElement());
+
+  });
+
+  $('body').on("click", ".add_question", function (event) {
+    event.preventDefault();
+
+    question_number++;
+    // console.log(question_number)
+    $('.question_list').append(createQuestionElement());
+
+  });
+
+  $('body').on('click', '#new-quiz-form_cancel', function () {
+    views_manager.show('quiz_list');
+    return false;
+  });
 
   $newQuizForm.on('submit', function (event) {
 
@@ -148,26 +164,5 @@ $(() => {
       .then()
   });
 
-  $('body').on("click",".add_answer", function (event) {
-    event.preventDefault();
-    console.log($(this).closest('.individual_question').attr('id'))
-
-    $(`#${$(this).closest('.individual_question').attr('id')} .individual_answer`).append(createAnswerElement());
-
-  });
-
-  $('body').on("click", ".add_question", function (event) {
-    event.preventDefault();
-
-    question_number++;
-    console.log(question_number)
-    $('.question_list').append(createQuestionElement());
-
-  });
-
-  $('body').on('click', '#new-quiz-form_cancel', function () {
-    views_manager.show('quiz_list');
-    return false;
-  });
 });
 
