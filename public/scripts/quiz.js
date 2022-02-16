@@ -3,6 +3,11 @@ $(() => {
   window.quizList = {};
 
   function createQuiz(quiz) {
+
+    if(quiz.is_hidden) {
+      return;
+    }
+
     return `
     <article class="quiz_box">
       <header>
@@ -14,10 +19,9 @@ $(() => {
 
 
       <footer class='quiz_box_footer'>
-      <p>${quiz.lever_of_difficulty}</p>
-      <form action='/quiz/:quizId'>
-        <input type='submit'>
-        <label>Start</label>
+      <p>${quiz.level_of_difficulty}</p>
+      <form action='/quiz/${quiz.id}' method='POST'>
+        <input type='submit' value='Start'>
         <label>Share</label>
       </form>
       </footer>
