@@ -53,13 +53,22 @@ module.exports = (db) => {
   router.post('/user_answer', (req, res) => {
 
     const user_id = req.session.userId;
-    const answers = req.body; //array of answers.id
+    const quiz_id = req.body.quizId;
+    const answers = req.body.answer;//array of answers.id
+    // const quiz_id = req.body.quiz_id;
+
+    // console.log(req.body);
+    // console.log(user_id);
 
     answers.forEach(x => {
 
-      db.addUserAnswer(user_id, x)
-        .then(data => res.send(data))
-        .catch(err => console.log(err.message));
+      db.getUserAttempt(user_id, quiz_id)
+        .then(attempt =>{
+          db.addUserAnswer(user_id, x, attempt)
+        })
+
+        // .then(data => res.send(data))
+        // .catch(err => console.log(err.message));
 
     });
   });
@@ -166,6 +175,7 @@ module.exports = (db) => {
   router.get("/quiz/:quizId", (req, res) => {
 
     const quiz_id = req.params.quizId;
+    const user_id = req.session.userId;
     let questionsArray = [];
     // let answersArray = {};
     // let quiz;
@@ -197,7 +207,7 @@ module.exports = (db) => {
 
             Promise.all(promisesArray).then((values) => {
 
-              res.send({ "quiz": quiz, "questions": questionsArray, "answers": values });
+              res.send({"user_id": user_id, "quiz": quiz, "questions": questionsArray, "answers": values });
 
             });
 

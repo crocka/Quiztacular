@@ -9,6 +9,7 @@ $(() => {
     .then(json => {
       // console.log('res' , json);
 
+      const userId = json.user_id;
       const quiz = json.quiz;
       const questionsArray = json.questions;
       const answersArray = json.answers;
@@ -42,19 +43,23 @@ $(() => {
       const $quiz = $(`
 
       <form id="new-quiz-form" class="new-quiz-form">
-       <h1>
+        <h1>
           ${quiz.title}
-      </h1>
+        </h1>
 
-      <h3>
+        <h3>
          ${quiz.description}
-       </h3>
+        </h3>
 
-       <div class='question-wrapper' id='quiz${quiz.id}'>
+        <div class='question-wrapper' id='quiz${quiz.id}'>
 
 
 
-      </div>
+        </div>
+
+        <div class="quiz__field-wrapper">
+          <button type="submit" id="quiz_submit">Submit</button>
+        </div>
       </form>
      `);
 
@@ -80,6 +85,23 @@ $(() => {
 
         }
       };
+
+      $quiz.on('submit', function (event) {
+
+        event.preventDefault();
+
+        // console.log($(this));
+        let answers = $(this).serialize();
+        // answers.quiz_id = quiz_id;
+        answers = `quizId=${quiz_id}&` + answers;
+
+        // const data = {quiz_id: quiz_id, answers};
+
+        // console.log($(this));
+        console.log(answers)
+        // createQuiz(data)
+        createUserAnswer(answers);
+      });
 
     });
 })

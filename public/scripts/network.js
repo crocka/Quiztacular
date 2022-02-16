@@ -46,10 +46,21 @@ function getMyDetails() {
 }
 
 const createQuiz = function(data) {
-  // console.log(data);
+  // console.log('network',data);
   return $.ajax({
     method: "POST",
     url: "/api/newQuiz",
+    data,
+  });
+}
+
+
+const createUserAnswer = function(data) {
+
+  console.log('network', data)
+  return $.ajax({
+    method: "POST",
+    url: "/api/user_answer",
     data,
   });
 }
