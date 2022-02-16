@@ -38,6 +38,14 @@ function getQuiz(quizId) {
   });
 }
 
+const getResult = function(userId_resultId) {
+  return $.ajax({
+    method: "GET",
+    url: `/api/result/${userId_resultId}`
+  });
+}
+
+
 function getMyDetails() {
   console.log("getMyDetails");
   return $.ajax({
@@ -64,3 +72,4 @@ const createUserAnswer = function(data) {
     data,
   });
 }
+

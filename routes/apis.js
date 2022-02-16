@@ -60,18 +60,49 @@ module.exports = (db) => {
     // console.log(req.body);
     // console.log(user_id);
 
-    answers.forEach(x => {
+    // const UserAnswer = new Promise((resolve, reject) => {
 
-      db.getUserAttempt(user_id, quiz_id)
-        .then(attempt =>{
-          db.addUserAnswer(user_id, x, attempt)
-        })
+    async function execute() {
 
+      let attempt = await db.getUserAttempt(user_id, quiz_id);
+
+      console.log('api attempt',attempt)
+      answers.forEach(x => {
+
+        db.addUserAnswer(user_id, x, attempt);
         // .then(data => res.send(data))
         // .catch(err => console.log(err.message));
+      });
 
-    });
+      const num = await db.getNumberOfQuestions(quiz_id);
+      const score = await db.getScore(user_id, quiz_id, num.count, attempt);
+
+      db.addResult(user_id, quiz_id, score);
+    }
+
+    execute();
   });
+    // db.getNumberOfQuestions(quiz_id)
+    //   .then((num) => {
+
+    //     db.getScore(user_id, quiz_id, num.count)
+    //       .then((score) => {
+
+
+            // db.addResult(user_id, quiz_id, score, started_at)
+
+
+    // });
+
+    // UserAnswer
+    //   .then(() => {
+
+
+    // })
+
+
+
+
 
   // update quiz in creating new quizzes
   router.post('/newQuiz', (req, res) => {
@@ -188,7 +219,7 @@ module.exports = (db) => {
           .then(questions => {
 
             questionsArray = questions;
-            console.log('qA' + questionsArray)
+            // console.log('qA' + questionsArray)
             let promisesArray = [];
 
             for (let x of questions) {
@@ -207,7 +238,7 @@ module.exports = (db) => {
 
             Promise.all(promisesArray).then((values) => {
 
-              res.send({"user_id": user_id, "quiz": quiz, "questions": questionsArray, "answers": values });
+              res.send({ "user_id": user_id, "quiz": quiz, "questions": questionsArray, "answers": values });
 
             });
 
@@ -220,8 +251,41 @@ module.exports = (db) => {
 
   });
 
+  router.get("/result/:userId_resultId", (req, res) => {
+
+    const userId_resultId = req.params.userId_resultId;
+    const array = userId_resultId.split('_');
+    const userId = Number(array[0]);
+    const resultId = Number(array[1]);
+
+    db.getResult(resultId)
+      .then((result) => {
+
+        db.getNumberOfQuestions(userId, result.quiz_id)
+          .then(num => {
+
+            db.getUserWithId(userId)
+              .then(user => {
+
+                db.getQuizWithQuizId(result.quiz_id)
+                  .then(quiz => {
+
+                    res.send({ "username": user.name, "quiz": quiz.title, "score": result.score,"completed_at": result.completed_at });
+
+                  })
+
+              })
+
+          })
+
+      })
+
+
+  });
+
   return router;
 };
+
 
 
 // /Users
