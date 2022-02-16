@@ -24,14 +24,24 @@ $(() => {
     clearQuizzes();
     for (const quiz of quizzes) {
       // const quiz = quizzes[quizId];
-      const quizHtml = quizList.createQuiz(quiz);
+      const quizHtml = quizList.createQuiz(quiz,true);
       addQuiz(quizHtml);
     }
   }
   window.quizLists.addQuizzes = addQuizzes;
 
+  function addMyQuizzes(quizzes) {
+    clearQuizzes();
 
+    for (const quiz of quizzes) {
+      // const quiz = quizzes[quizId];
+      const quizHtml = quizList.createQuiz(quiz,false);
+      addQuiz(quizHtml);
+    }
 
+  }
+
+  window.quizLists.addMyQuizzes = addMyQuizzes;
 
 });
 

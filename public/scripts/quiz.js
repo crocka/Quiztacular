@@ -2,15 +2,15 @@ $(() => {
 
   window.quizList = {};
 
-  function createQuiz(quiz) {
+  function createQuiz(quiz,public) {
 
-    if(quiz.is_hidden) {
+    if(quiz.is_hidden && public) {
       return;
     }
 
     return `
     <article class="quiz_box">
-      <header>
+      <header class="quiz_box_header">
       <h1 class="quiz_title">${quiz.title}</h1>
       <h3 class="quiz_subject">${quiz.subject}</h3>
       </header>

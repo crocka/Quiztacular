@@ -13,7 +13,7 @@ $(() => {
       userLinks = `
       <nav id="page-header__user-links" class="page-header__user-links">
       <span class='logo'>Quiztacular</span>
-        <div class='login-signup'>
+        <div class='buttons'>
           <button type="button" class="login_button">Log In</button>
           <button type="button" class="sign-up_button">Sign Up</button>
         </div>
@@ -25,9 +25,9 @@ $(() => {
       <span class='logo'>Quiztacular</span>
         <div>
           <ul>${user.name}</ul>
-          <button type='button' class="create_quiz_button">Create Quiz</button>
-          <button type='button' class="my_quizzes_button">My Quizzes</button>
-          <button type='button' class="logout_button">Log Out</button>
+            <button type='button' class="create_quiz_button">Create Quiz</button>
+            <button type='button' class="my_quizzes_button">My Quizzes</button>
+            <button type='button' class="logout_button">Log Out</button>
         </div>
       </nav>
       `
@@ -63,8 +63,6 @@ $(() => {
 
   $("header").on('click', '.create_quiz_button', () => {
 
-    //show create quiz form
-
     views_manager.show('new_quiz');
 
   });
@@ -72,6 +70,9 @@ $(() => {
   $("header").on('click', '.my_quizzes_button', () => {
 
     //show quiz list
+
+    quizLists.addMyQuizzes;
+    views_manager.show('new_quiz');
   });
 
   $("header").on('click', '.logout_button', () => {

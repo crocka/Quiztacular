@@ -32,6 +32,16 @@ module.exports = (db) => {
 
   });
 
+  router.get('/my', (req, res) => {
+
+    let user_id = req.params.userId;
+
+    db.getMyQuizzes(user_id)
+      .then(data => res.send(data))
+      .catch(err => console.log(err.message));
+
+  });
+
   // all quizzes of a user
   router.get('/:user_id', (req, res) => {
 

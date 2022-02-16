@@ -29,6 +29,14 @@ function getAllQuizzes() {
   });
 }
 
+function getMyQuizzes() {
+
+  return $.ajax({
+    method: "GET",
+    url: "/api/my",
+  });
+}
+
 function getQuiz(quizId) {
 
   return $.ajax({

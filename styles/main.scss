@@ -1,12 +1,34 @@
 body {
-  background: rgb(163, 208, 219);
-  background: linear-gradient(
-    227deg,
-    rgba(163, 208, 219, 1) 0%,
-    rgba(163, 176, 219, 1) 20%,
-    rgba(163, 173, 219, 1) 34%,
-    rgba(163, 219, 208, 1) 59%,
-    rgba(163, 208, 219, 1) 74%,
-    rgba(163, 208, 219, 1) 100%
-  );
+  // background: #d0e1ff
+  background-image: linear-gradient(to bottom, #ffecec 30% , #d0e1ff 30%)
+
+}
+
+
+
+#main-content {
+  margin: 5em;
+  margin-top: 10em;
+  font-family: 'Zen Kaku Gothic Antique';
+}
+
+.float{
+
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color:#f7cac9;
+	color:#FFF;
+	border-radius:50px;
+  border: none;
+	text-align:center;
+
+}
+
+.float:hover {
+
+  box-shadow: 2px 2px #315561;
+
 }
