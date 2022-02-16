@@ -40,6 +40,12 @@ module.exports = (db) => {
   // });
 
 
+  router.get('/:quizId', (req, res) => {
+
+    res.render('quiz')
+
+  });
+
   router.post('/:quizId', (req, res) => {
 
     res.render('quiz')
