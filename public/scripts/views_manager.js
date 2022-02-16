@@ -12,7 +12,7 @@ $(() => {
 
     switch (item) {
       case 'quiz_list':
-        $quizList.appendTo($main);
+        $quizLists.appendTo($main);
         break;
       case 'new_quiz':
         $newQuizForm.appendTo($main);

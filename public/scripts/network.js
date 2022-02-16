@@ -21,12 +21,11 @@ function signUp(data) {
   });
 }
 
-function getAllQuizzes(data) {
+function getAllQuizzes() {
 
   return $.ajax({
     method: "GET",
     url: "/api/",
-    data
   });
 }
 

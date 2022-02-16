@@ -10,6 +10,14 @@
   width: 100%
 }
 
+.login-signup {
+  display: flex;
+  flex-direction: center;
+  align-self: center;
+  margin: 1.5 em;
+  padding-right: 50px
+}
+
 span.logo {
   font-family: 'Orbitron';
   margin: 1.5 em;

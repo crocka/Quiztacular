@@ -13,22 +13,22 @@ $(() => {
       userLinks = `
       <nav id="page-header__user-links" class="page-header__user-links">
       <span class='logo'>Quiztacular</span>
-        <ul>
+        <div class='login-signup'>
           <button type="button" class="login_button">Log In</button>
           <button type="button" class="sign-up_button">Sign Up</button>
-        </ul>
+        </div>
       </nav>
       `
     } else {
       userLinks = `
       <nav id="page-header__user-links" class="page-header__user-links">
       <span class='logo'>Quiztacular</span>
-        <ul>
-          <li>${user.name}</li>
+        <div>
+          <ul>${user.name}</ul>
           <button type='button' class="create_quiz_button">Create Quiz</button>
           <button type='button' class="my_quizzes_button">My Quizzes</button>
           <button type='button' class="logout_button">Log Out</button>
-        </ul>
+        </div>
       </nav>
       `
     }
