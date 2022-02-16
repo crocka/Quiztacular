@@ -258,6 +258,9 @@ module.exports = (db) => {
     const userId = Number(array[0]);
     const resultId = Number(array[1]);
 
+    console.log(userId,'this')
+    console.log(resultId, 'this')
+
     db.getResult(resultId)
       .then((result) => {
 
