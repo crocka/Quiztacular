@@ -34,7 +34,7 @@ module.exports = (db) => {
 
   router.get('/my', (req, res) => {
 
-    let user_id = req.params.userId;
+    let user_id = req.session.userId;
 
     db.getMyQuizzes(user_id)
       .then(data => res.send(data))

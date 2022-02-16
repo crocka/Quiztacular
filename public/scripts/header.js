@@ -44,7 +44,7 @@ $(() => {
       updateHeader(json.user);
     });
 
-    $("header").on('click', '.login_button', () => {
+  $("header").on('click', '.login_button', () => {
     console.log('clicked')
     views_manager.show('logIn');
 
@@ -71,8 +71,14 @@ $(() => {
 
     //show quiz list
 
-    quizLists.addMyQuizzes;
-    views_manager.show('new_quiz');
+    getMyQuizzes()
+      .then(json => {
+
+        quizLists.addMyQuizzes(json);
+        // views_manager.show('quiz_list');
+
+      })
+
   });
 
   $("header").on('click', '.logout_button', () => {
