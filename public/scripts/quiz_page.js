@@ -100,7 +100,16 @@ $(() => {
         // console.log($(this));
         // console.log(answers)
         // createQuiz(data)
-        createUserAnswer(answers);
+        createUserAnswer(answers)
+          .then(result => {
+
+            console.log('quizpage',result);
+            window.location.replace(`http://localhost:8080/result/${result.user_id}_${result.id}`);
+
+          })
+          .catch(err => console.log(err));
+
+
       });
 
     });

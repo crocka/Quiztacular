@@ -72,7 +72,7 @@ const createQuiz = function(data) {
 
 const createUserAnswer = function(data) {
 
-  console.log('network', data)
+  // console.log('network', data)
   return $.ajax({
     method: "POST",
     url: "/api/user_answer",

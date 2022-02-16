@@ -76,8 +76,8 @@ module.exports = (db) => {
 
       let attempt = await db.getUserAttempt(user_id, quiz_id);
 
-      console.log('api attempt',attempt)
-      answers.forEach(x => {
+      // console.log('api attempt',attempt)
+      await answers.forEach(x => {
 
         db.addUserAnswer(user_id, x, attempt);
         // .then(data => res.send(data))
@@ -87,10 +87,17 @@ module.exports = (db) => {
       const num = await db.getNumberOfQuestions(quiz_id);
       const score = await db.getScore(user_id, quiz_id, num.count, attempt);
 
-      db.addResult(user_id, quiz_id, score);
+      return await db.addResult(user_id, quiz_id, score)
+        .then(result => result);
     }
 
-    execute();
+    execute()
+      .then(result => {
+
+        res.send(result);
+        // res.redirect(200, `http://localhost:8080/result/${user_id}_${result.id}`);
+
+      })
   });
     // db.getNumberOfQuestions(quiz_id)
     //   .then((num) => {

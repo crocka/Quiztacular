@@ -19,7 +19,7 @@ $(() => {
 
 
       <footer class='quiz_box_footer'>
-      <p>${quiz.level_of_difficulty}</p>
+      <p>Level of Difficulty: ${quiz.level_of_difficulty}</p>
       <form action='/quiz/${quiz.id}' method='POST'>
         <input type='submit' value='Start'>
         <label>Share</label>
