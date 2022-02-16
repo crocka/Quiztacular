@@ -14,7 +14,7 @@ $(() => {
       const questionsArray = json.questions;
       const answersArray = json.answers;
 
-      // console.log("asdf", answersArray)
+      // console.log("asdf", quiz)
 
       const createQuizAnswerElement = function (answer) {
 
@@ -98,7 +98,7 @@ $(() => {
         // const data = {quiz_id: quiz_id, answers};
 
         // console.log($(this));
-        // console.log(answers)
+        console.log(answers)
         // createQuiz(data)
         createUserAnswer(answers)
           .then(result => {

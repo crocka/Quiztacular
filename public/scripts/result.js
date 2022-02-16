@@ -15,17 +15,30 @@ $(() => {
       // const started_at = json.started_at;
       const completed_at = json.completed_at;
 
+      const myFunction = function() {
+
+        /* Copy the text inside the text field */
+        navigator.clipboard.writeText(window.location.href);
+
+        /* Alert the copied text */
+        alert("Copied link to your clipboard");
+      };
+
       const $result = $(`
 
       <h3>Congratulations, ${username}!!</h3>
 
       <h6>You have completed the ${quizTitle} quiz on ${completed_at} and scored ${score}% !</h6>
 
+      <button onclick="myFunction()">Share</button>
+
 
       `);
 
       window.$result = $result;
       $('#main-content').append($result);
+
+
 
 
 

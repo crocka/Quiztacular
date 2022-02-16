@@ -77,12 +77,12 @@ module.exports = (db) => {
       let attempt = await db.getUserAttempt(user_id, quiz_id);
 
       // console.log('api attempt',attempt)
-      await answers.forEach(x => {
+      for (let x of answers) {
 
         db.addUserAnswer(user_id, x, attempt);
         // .then(data => res.send(data))
         // .catch(err => console.log(err.message));
-      });
+      };
 
       const num = await db.getNumberOfQuestions(quiz_id);
       const score = await db.getScore(user_id, quiz_id, num.count, attempt);
@@ -99,23 +99,23 @@ module.exports = (db) => {
 
       })
   });
-    // db.getNumberOfQuestions(quiz_id)
-    //   .then((num) => {
+  // db.getNumberOfQuestions(quiz_id)
+  //   .then((num) => {
 
-    //     db.getScore(user_id, quiz_id, num.count)
-    //       .then((score) => {
-
-
-            // db.addResult(user_id, quiz_id, score, started_at)
+  //     db.getScore(user_id, quiz_id, num.count)
+  //       .then((score) => {
 
 
-    // });
-
-    // UserAnswer
-    //   .then(() => {
+  // db.addResult(user_id, quiz_id, score, started_at)
 
 
-    // })
+  // });
+
+  // UserAnswer
+  //   .then(() => {
+
+
+  // })
 
 
 
@@ -146,49 +146,60 @@ module.exports = (db) => {
       .then(data => {
 
         quiz_id = data.id;
-        res.send(data);
+        console.log(data);
+        // res.send(data);
 
       })
       .then(() => {
 
-        for (let i = 0; i < data.question_title.length; i++) {
+        async function addQuestionAnswer() {
 
-          // console.log('hi:' + data.question_title[i]);
+          for (let i = 0; i < data.question_title.length; i++) {
 
-          let question = {
-            "quiz_id": quiz_id,
-            "title": data.question_title[i]
-          };
+            // console.log('hi:' + data.question_title[i]);
 
-          // console.log('hi2:' + question);
+            let question = {
+              "quiz_id": quiz_id,
+              "title": data.question_title[i]
+            };
 
-          db.addQuestion(question)
-            .then(question => {
+            // console.log('hi2:' + question);
 
-              let question_id = question.id;
+            await db.addQuestion(question)
+              .then(question => {
 
-              for (let j = 0; j < data[`question${i}_answer`].length; j++) {
+                let question_id = question.id;
 
-                let answerCorrectArray = data[`question${i}answer_is_correct`].slice(1);
+                for (let j = 0; j < data[`question${i}_answer`].length; j++) {
 
-                let answer = {
-                  "question_id": question_id,
-                  "title": data[`question${i}_answer`][j],
-                  "is_correct": answerCorrectArray[j]
+                  let answerCorrectArray = data[`question${i}answer_is_correct`];
+
+                  if (Array.isArray(answerCorrectArray)) {
+
+                    answerCorrectArray = answerCorrectArray.slice(1);
+
+                  }
+
+                  let answer = {
+                    "question_id": question_id,
+                    "title": data[`question${i}_answer`][j],
+                    "is_correct": answerCorrectArray[j]
+                  };
+
+                  // console.log(answer.question_id)
+                  // console.log(answer.title)
+                  // console.log(answer.is_correct)
+                  db.addAnswer(answer);
+
                 };
 
-                // console.log(answer.question_id)
-                // console.log(answer.title)
-                // console.log(answer.is_correct)
-                db.addAnswer(answer);
 
-              };
+              })
+          }
 
-
-            })
 
         };
-
+        addQuestionAnswer();
       })
       .catch(err => console.log('1234:' + err.message));
 
@@ -239,7 +250,7 @@ module.exports = (db) => {
             // console.log('qA' + questionsArray)
             let promisesArray = [];
 
-            for (let x of questions) {
+            for (let x of questionsArray) {
 
               promisesArray.push(db.getAnswersWithQuestionId(x.id));
               // .then(answers => {
@@ -253,8 +264,11 @@ module.exports = (db) => {
               // })
             }
 
+            console.log(promisesArray, 'promise all')
             Promise.all(promisesArray).then((values) => {
 
+              console.log('promise values', values)
+              console.log({ "user_id": user_id, "quiz": quiz, "questions": questionsArray, "answers": values })
               res.send({ "user_id": user_id, "quiz": quiz, "questions": questionsArray, "answers": values });
 
             });
@@ -275,8 +289,8 @@ module.exports = (db) => {
     const userId = Number(array[0]);
     const resultId = Number(array[1]);
 
-    console.log(userId,'this')
-    console.log(resultId, 'this')
+    // console.log(userId,'this')
+    // console.log(resultId, 'this')
 
     db.getResult(resultId)
       .then((result) => {
@@ -290,7 +304,7 @@ module.exports = (db) => {
                 db.getQuizWithQuizId(result.quiz_id)
                   .then(quiz => {
 
-                    res.send({ "username": user.name, "quiz": quiz.title, "score": result.score,"completed_at": result.completed_at });
+                    res.send({ "username": user.name, "quiz": quiz.title, "score": result.score, "completed_at": result.completed_at });
 
                   })
 

@@ -164,9 +164,9 @@ $(() => {
     // console.log($(this));
     const data = $(this).serialize();
     // console.log($(this).val());
-    // console.log(data)
+    // console.log('newquiz',data)
     createQuiz(data)
-      .then()
+      .then(data => console.log('new_quiz', data))
   });
 
 });

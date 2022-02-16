@@ -24,7 +24,7 @@ $(() => {
       <nav id="page-header__user-links" class="page-header__user-links">
       <span class='logo'>Quiztacular</span>
         <div>
-          <ul>${user.name}</ul>
+          <ul>User: ${user.name}</ul>
             <button type='button' class="create_quiz_button">Create Quiz</button>
             <button type='button' class="my_quizzes_button">My Quizzes</button>
             <button type='button' class="logout_button">Log Out</button>
