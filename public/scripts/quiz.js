@@ -20,10 +20,14 @@ $(() => {
 
       <footer class='quiz_box_footer'>
       <p>Level of Difficulty: ${quiz.level_of_difficulty}</p>
-      <form action='/quiz/${quiz.id}' method='POST'>
-        <input type='submit' value='Start'>
-        <label>Share</label>
+      <form id='${quiz.id}' action='/quiz/${quiz.id}' method='POST'>
+          <i type='submit' class="fa-solid fa-play"></i>
       </form>
+        <div>
+          <i class="fa-solid fa-share"></i>
+        </div>
+
+
       </footer>
 
     </article>
@@ -31,4 +35,5 @@ $(() => {
   };
 
   window.quizList.createQuiz = createQuiz;
+
 });

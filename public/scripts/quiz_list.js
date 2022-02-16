@@ -43,6 +43,20 @@ $(() => {
 
   window.quizLists.addMyQuizzes = addMyQuizzes;
 
+  $('body').on('click','.fa-solid fa-share', function() {
+
+    let url = $(this).parent().attr('id');
+    alert('Share link copied to your clipboard.');
+
+    navigator.clipboard.writeText(`http://localhost:8080/quiz/${url}`)
+      .then(() => {
+
+        alert('Share link copied to your clipboard.');
+
+      })
+
+  });
+
 });
 
 

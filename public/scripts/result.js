@@ -21,7 +21,7 @@ $(() => {
 
       <h6>You have completed the ${quizTitle} quiz on ${completed_at} and scored ${score}% !</h6>
 
-      <button id='shareButton'>Share</button>
+      <button id='shareButtonResult'>Share</button>
 
 
       `);
@@ -32,10 +32,14 @@ $(() => {
 
 
 
-      $('body').on('click','#shareButton', function() {
+      $('body').on('click','#shareButtonResult', function() {
 
-        navigator.clipboard.writeText(url);
-        alert('Share link copied to your clipboard.');
+        navigator.clipboard.writeText(url)
+          .then(() => {
+
+            alert('Share link copied to your clipboard.');
+
+          })
 
       });
 

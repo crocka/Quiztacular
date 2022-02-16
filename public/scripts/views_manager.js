@@ -5,10 +5,11 @@ $(() => {
   window.views_manager = {};
 
   window.views_manager.show = function(item) {
-    // $newQuizForm.detach();
-    // $quizList.detach();
-    // $registrationForm.detach();
-    // $logInForm.detach();
+    $newQuizForm.detach();
+    $quizLists.detach();
+    $logInForm.detach();
+    // $quiz.detach();
+    $signUpForm.detach();
 
     switch (item) {
       case 'quiz_list':
