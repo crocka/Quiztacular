@@ -1,7 +1,7 @@
 $(() => {
   const url = window.location.href;
 
-  const quiz_id_array = url.split('/')
+  const quiz_id_array = url.replace('?','').split('/');
 
   const quiz_id = Number(quiz_id_array[quiz_id_array.length - 1]);
 
@@ -49,7 +49,8 @@ $(() => {
 
           const $quiz = $(`
 
-      <form id="new-quiz-form" class="new-quiz-form">
+          <div id='doing-quiz-section'>
+      <form id="doing-quiz-form" class="doing-quiz-form">
         <h1>
           ${quiz.title}
         </h1>
@@ -68,6 +69,7 @@ $(() => {
           <button type="submit" id="quiz_submit">Submit</button>
         </div>
       </form>
+      </div>
      `);
 
           // console.log('quizhtml' , $quiz);
@@ -105,12 +107,12 @@ $(() => {
             // const data = {quiz_id: quiz_id, answers};
 
             // console.log($(this));
-            console.log(answers)
+            // console.log(answers)
             // createQuiz(data)
             createUserAnswer(answers)
               .then(result => {
 
-                console.log('quizpage', result);
+                // console.log('quizpage', result);
                 window.location.replace(`http://localhost:8080/result/${result.user_id}_${result.id}`);
 
               })

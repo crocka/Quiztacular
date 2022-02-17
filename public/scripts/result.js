@@ -8,7 +8,6 @@ $(() => {
 
   getMyDetails()
   .then(function (j) {
-    header.update(j.user);
 
     getResult(result_id)
     .then((json) => {
@@ -20,24 +19,97 @@ $(() => {
       // const started_at = json.started_at;
       const completed_at = json.completed_at;
 
+      // const $result = $(`
+
+      // <h3>Congratulations, ${username}!!</h3>
+
+      // <h6>You have completed the ${quizTitle} quiz on ${completed_at} and scored ${score}% !</h6>
+
+      // <button id='shareButtonResult'>Share</button>
+
+
+      // `);
+
       const $result = $(`
 
-      <h3>Congratulations, ${username}!!</h3>
+      <html>
+    <head>
+        <style type='text/css'>
+            body, html {
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                color: black;
+                display: table;
+                font-family: Georgia, serif;
+                font-size: 24px;
+                text-align: center;
+            }
+            .container {
+                border: 20px solid tan;
+                width: 750px;
+                height: 563px;
+                display: table-cell;
+                vertical-align: middle;
+            }
+            .logo {
+                color: tan;
+            }
 
-      <h6>You have completed the ${quizTitle} quiz on ${completed_at} and scored ${score}% !</h6>
+            .marquee {
+                color: tan;
+                font-size: 48px;
+                margin: 20px;
+            }
+            .assignment {
+                margin: 20px;
+            }
+            .person {
+                border-bottom: 2px solid black;
+                font-size: 32px;
+                font-style: italic;
+                margin: 20px auto;
+                width: 400px;
+            }
+            .reason {
+                margin: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="logo">
+              Congratulations, ${username}!
+            </div>
 
-      <button id='shareButtonResult'>Share</button>
+            <div class="marquee">
+                You scored ${score}%
+            </div>
 
+            <div class="assignment">
+                On the
+            </div>
 
+            <div class="person">
+              ${quizTitle} quiz
+            </div>
+
+            <div class="reason">
+                Completion date<br/>
+                ${completed_at}
+            </div>
+        </div>
+    </body>
+</html>
       `);
 
       window.$result = $result;
       $('#main-content').append($result);
 
-
-
-
       $('body').on('click','#shareButtonResult', function() {
+
+        console.log(json)
 
         navigator.clipboard.writeText(url)
           .then(() => {

@@ -56,6 +56,7 @@ const getResult = function(userId_resultId) {
 function getMyDetails() {
   console.log("getMyDetails");
   return $.ajax({
+    method: "GET",
     url: "/users/me",
   });
 }

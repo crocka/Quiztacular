@@ -28,7 +28,7 @@ module.exports = (db) => {
       return;
     }
 
-    console.log(userId)
+    // console.log(userId)
     db.getUserWithId(userId)
       .then(user => {
         if (!user) {

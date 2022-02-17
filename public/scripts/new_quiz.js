@@ -43,7 +43,9 @@ $(() => {
     `;
   };
   const $newQuizForm = $(`
+
   <form id="new-quiz-form" class="new-quiz-form">
+
       <p>Make a New Quiz</p>
 
       <div class="new-quiz-form__field-wrapper">
@@ -107,6 +109,8 @@ $(() => {
         <button type="submit" id="new-quiz-form_create">Create!</button>
         <a id="new-quiz-form_cancel" href="#">Cancel</a>
       </div>
+
+    </form>
   `);
 
   window.$newQuizForm = $newQuizForm;
@@ -137,7 +141,7 @@ $(() => {
 
     const question_num = $(this).parent('.individual_question').attr('id');
 
-    console.log('this is:' + question_num)
+    // console.log('this is:' + question_num)
 
     $(`#${question_num} .individual_answer`).append(createAnswerElement(question_num));
 
@@ -164,9 +168,9 @@ $(() => {
     // console.log($(this));
     const data = $(this).serialize();
     // console.log($(this).val());
-    // console.log('newquiz',data)
+    console.log('newquiz',data)
     createQuiz(data)
-      .then(data => console.log('new_quiz', data))
+      // .then(data => console.log('new_quiz', data))
   });
 
 });

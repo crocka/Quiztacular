@@ -40,3 +40,28 @@ body {
 	font-family: 'Zen Kaku Gothic Antique';
 
 }
+
+#doing-quiz-section {
+  border: 2px black;
+  display: flex;
+  justify-content: center;
+}
+
+#create-quiz-section {
+  display: flex;
+  justify-content: center;
+  font-size: x-large;
+}
+
+input {
+
+  background-color: transparent;
+  border-width: 0;
+  border-bottom-width: thin;
+  border-bottom-color: 1px #252e41;
+  height:1.5em;
+  word-wrap: break-word;
+  outline: none;
+
+
+}

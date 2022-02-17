@@ -35,8 +35,12 @@ $(() => {
 
     for (const quiz of quizzes) {
       // const quiz = quizzes[quizId];
+
       const quizHtml = quizList.createQuiz(quiz, false);
+
+
       addQuiz(quizHtml);
+
     }
 
   }

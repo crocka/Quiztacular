@@ -64,7 +64,7 @@ module.exports = (db) => {
 
     const user_id = req.session.userId;
     const quiz_id = req.body.quizId;
-    const answers = req.body.answer;//array of answers.id
+    let answers = req.body.answer;//array of answers.id
     // const quiz_id = req.body.quiz_id;
 
     // console.log(req.body);
@@ -75,7 +75,12 @@ module.exports = (db) => {
     async function execute() {
 
       let attempt = await db.getUserAttempt(user_id, quiz_id);
-
+      let answer = [];
+      if (!Array.isArray(answers)) {
+        answer.push(answers);
+        answers = answer;
+        console.log('api user_answer', answers)
+      }
       // console.log('api attempt',attempt)
       for (let x of answers) {
 
@@ -155,13 +160,20 @@ module.exports = (db) => {
 
         async function addQuestionAnswer() {
 
-          for (let i = 0; i < data.question_title.length; i++) {
+          let question_title = [];
+
+          if (!Array.isArray(data.question_title)) {
+
+            question_title.push(data.question_title);
+          }
+
+          for (let i = 0; i < question_title.length; i++) {
 
             // console.log('hi:' + data.question_title[i]);
 
             let question = {
               "quiz_id": quiz_id,
-              "title": data.question_title[i]
+              "title": question_title[i]
             };
 
             // console.log('hi2:' + question);
@@ -171,7 +183,32 @@ module.exports = (db) => {
 
                 let question_id = question.id;
 
-                for (let j = 0; j < data[`question${i}_answer`].length; j++) {
+                if (Array.isArray(data[`question${i}_answer`])) {
+
+                  for (let j = 0; j < data[`question${i}_answer`].length; j++) {
+
+                    let answerCorrectArray = data[`question${i}answer_is_correct`];
+
+                    if (Array.isArray(answerCorrectArray)) {
+
+                      answerCorrectArray = answerCorrectArray.slice(1);
+
+                    }
+
+                    let answer = {
+                      "question_id": question_id,
+                      "title": data[`question${i}_answer`][j],
+                      "is_correct": answerCorrectArray[j]
+                    };
+
+                    console.log(answer.question_id)
+                    console.log(answer.title)
+                    console.log(answer.is_correct)
+                    db.addAnswer(answer);
+
+                  };
+
+                } else {
 
                   let answerCorrectArray = data[`question${i}answer_is_correct`];
 
@@ -183,16 +220,19 @@ module.exports = (db) => {
 
                   let answer = {
                     "question_id": question_id,
-                    "title": data[`question${i}_answer`][j],
-                    "is_correct": answerCorrectArray[j]
+                    "title": data[`question${i}_answer`],
+                    "is_correct": answerCorrectArray[0]
                   };
 
-                  // console.log(answer.question_id)
-                  // console.log(answer.title)
-                  // console.log(answer.is_correct)
+                  console.log(answer.question_id)
+                  console.log(answer.title)
+                  console.log(answer.is_correct)
                   db.addAnswer(answer);
 
-                };
+
+                }
+
+
 
 
               })
@@ -286,28 +326,23 @@ module.exports = (db) => {
   router.get("/result/:userId_resultId", (req, res) => {
 
     const userId_resultId = req.params.userId_resultId;
-    const array = userId_resultId.split('_');
+    const array = userId_resultId.replace('?', '').split('_');
     const userId = Number(array[0]);
     const resultId = Number(array[1]);
 
-    // console.log(userId,'this')
-    // console.log(resultId, 'this')
+    console.log(userId, 'this')
+    console.log(resultId, 'this')
 
     db.getResult(resultId)
       .then((result) => {
 
-        db.getNumberOfQuestions(userId, result.quiz_id)
-          .then(num => {
+        db.getUserWithId(userId)
+          .then(user => {
 
-            db.getUserWithId(userId)
-              .then(user => {
+            db.getQuizWithQuizId(result.quiz_id)
+              .then(quiz => {
 
-                db.getQuizWithQuizId(result.quiz_id)
-                  .then(quiz => {
-
-                    res.send({ "username": user.name, "quiz": quiz.title, "score": result.score, "completed_at": result.completed_at });
-
-                  })
+                res.send({ "username": user.name, "quiz": quiz.title, "score": result.score, "completed_at": result.completed_at });
 
               })
 
