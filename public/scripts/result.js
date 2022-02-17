@@ -6,8 +6,8 @@ $(() => {
   const result_id = result_id_array[result_id_array.length - 1];
 
 
-  getMyDetails()
-  .then(function (j) {
+  // getMyDetails()
+  // .then(function (j) {
 
     getResult(result_id)
     .then((json) => {
@@ -99,7 +99,9 @@ $(() => {
                 Completion date<br/>
                 ${completed_at}
             </div>
+            <button id='shareButtonResult'>Share</button>
         </div>
+
     </body>
 </html>
       `);
@@ -123,7 +125,7 @@ $(() => {
 
     })
 
-  })
-  .catch(err => console.log(err));
+  // })
+  // .catch(err => console.log(err));
 
 });

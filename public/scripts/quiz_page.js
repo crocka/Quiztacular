@@ -12,6 +12,8 @@ $(() => {
 
       if (json.user) {
 
+        // console.log(quiz_id_array)
+        // console.log('quiz_page getQuiz',quiz_id)
         getQuiz(quiz_id)
         .then(json => {
           // console.log('res' , json);
@@ -49,8 +51,9 @@ $(() => {
 
           const $quiz = $(`
 
-          <div id='doing-quiz-section'>
+
       <form id="doing-quiz-form" class="doing-quiz-form">
+
         <h1>
           ${quiz.title}
         </h1>
@@ -68,8 +71,8 @@ $(() => {
         <div class="quiz__field-wrapper">
           <button type="submit" id="quiz_submit">Submit</button>
         </div>
+
       </form>
-      </div>
      `);
 
           // console.log('quizhtml' , $quiz);
@@ -107,7 +110,7 @@ $(() => {
             // const data = {quiz_id: quiz_id, answers};
 
             // console.log($(this));
-            // console.log(answers)
+            console.log(answers)
             // createQuiz(data)
             createUserAnswer(answers)
               .then(result => {

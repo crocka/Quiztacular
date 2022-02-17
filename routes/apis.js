@@ -67,7 +67,7 @@ module.exports = (db) => {
     let answers = req.body.answer;//array of answers.id
     // const quiz_id = req.body.quiz_id;
 
-    // console.log(req.body);
+    console.log('/api/user_answer',req.body);
     // console.log(user_id);
 
     // const UserAnswer = new Promise((resolve, reject) => {
@@ -145,13 +145,13 @@ module.exports = (db) => {
       "description": data.quiz_description
 
     };
-    // console.log("hiddendata " +data.quiz_isHidden)
+    // console.log("api/newQuiz " + quiz)
 
     db.addQuiz(quiz)
       .then(data => {
 
         quiz_id = data.id;
-        console.log(data);
+        console.log(data,'api/newQuiz');
         // res.send(data);
 
 
@@ -162,9 +162,14 @@ module.exports = (db) => {
 
           let question_title = [];
 
+
           if (!Array.isArray(data.question_title)) {
 
             question_title.push(data.question_title);
+
+          } else {
+
+            question_title = data.question_title;
           }
 
           for (let i = 0; i < question_title.length; i++) {
@@ -224,16 +229,11 @@ module.exports = (db) => {
                     "is_correct": answerCorrectArray[0]
                   };
 
-                  console.log(answer.question_id)
-                  console.log(answer.title)
-                  console.log(answer.is_correct)
+                  console.log(answer,'api/newQuiz')
                   db.addAnswer(answer);
 
 
                 }
-
-
-
 
               })
           }
@@ -274,13 +274,21 @@ module.exports = (db) => {
 
   router.get("/quiz/:quizId", (req, res) => {
 
-    const quiz_id = req.params.quizId;
+    const quiz_id = Number(req.params.quizId.replace('?',''));
     const user_id = req.session.userId;
     let questionsArray = [];
     // let answersArray = {};
     // let quiz;
 
-    db.getQuizWithQuizId(quiz_id)
+    console.log(req.params)
+
+    // if(typeof quiz_id != 'number') {
+
+    //   res.send("NaN error!");
+
+    // } else {
+
+      db.getQuizWithQuizId(quiz_id)
       .then(q => {
         const quiz = q
 
@@ -291,6 +299,7 @@ module.exports = (db) => {
             // console.log('qA' + questionsArray)
             let promisesArray = [];
 
+            console.log('let me see', questions)
             for (let x of questions) {
 
               promisesArray.push(db.getAnswersWithQuestionId(x.id));
@@ -319,6 +328,11 @@ module.exports = (db) => {
       })
       .catch(err => console.log(err.message));
 
+
+    // }
+
+
+
     // setTimeout(() => {res.send({ "questions": questionsArray, "answers": answersArray })}, 1000);
 
   });
@@ -339,8 +353,11 @@ module.exports = (db) => {
         db.getUserWithId(userId)
           .then(user => {
 
+
             db.getQuizWithQuizId(result.quiz_id)
               .then(quiz => {
+
+                console.log('/api/result',{ "username": user.name, "quiz": quiz.title, "score": result.score, "completed_at": result.completed_at })
 
                 res.send({ "username": user.name, "quiz": quiz.title, "score": result.score, "completed_at": result.completed_at });
 
