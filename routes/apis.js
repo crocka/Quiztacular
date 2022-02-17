@@ -251,7 +251,7 @@ module.exports = (db) => {
             // console.log('qA' + questionsArray)
             let promisesArray = [];
 
-            for (let x of questionsArray) {
+            for (let x of questions) {
 
               promisesArray.push(db.getAnswersWithQuestionId(x.id));
               // .then(answers => {

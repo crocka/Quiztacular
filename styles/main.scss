@@ -1,6 +1,8 @@
 body {
   // background: #d0e1ff
-  background-image: linear-gradient(to bottom, #ffecec 30% , #d0e1ff 30%)
+  // background-image: linear-gradient(0.25 turn, #d0e1ff, #ffecec, #d0e1ff)
+  // background: linear-gradient(to right, #d0e1ff,10%, #ffecec, #ffecec, 10%, #d0e1ff);
+  background: linear-gradient(90deg, #d0e1ff, white, #f7cac9);
 
 }
 
@@ -19,7 +21,7 @@ body {
 	height:60px;
 	bottom:40px;
 	right:40px;
-	background-color:#f7cac9;
+	background-color:#92a8d1;
 	color:#FFF;
 	border-radius:50px;
   border: none;
@@ -29,7 +31,8 @@ body {
 
 .float:hover {
 
-  box-shadow: 2px 2px #315561;
+  box-shadow: 2px 2px #252e41;
+  color:#FFF;
 
 }
 

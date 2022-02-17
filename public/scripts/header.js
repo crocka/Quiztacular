@@ -12,20 +12,32 @@ $(() => {
     if (!user) {
       userLinks = `
       <nav id="page-header__user-links" class="page-header__user-links">
-      <span class='logo'>Quiztacular</span>
+      <span class='logo'>
+      <form action='/' method='GET'>
+        <button type="submit" class="btn">Quiztacular</button>
+      </form>
+      </span>
         <div class='buttons'>
-          <button type="button" class="login_button">Log In</button>
-          <button type="button" class="sign-up_button">Sign Up</button>
+          <button type="button" class="login_button">
+            <i class="fa-solid fa-right-to-bracket fa-xl"></i>
+          </button>
+          <button type="button" class="sign-up_button">
+            <i class="fa-solid fa-user-plus fa-xl"></i>
+          </button>
         </div>
       </nav>
       `
     } else {
       userLinks = `
       <nav id="page-header__user-links" class="page-header__user-links">
-      <span class='logo'>Quiztacular</span>
+      <span class='logo'>
+      <form action='/' method='GET'>
+        <button type="submit" class="btn">Quiztacular</button>
+      </form>
+      </span>
         <div>
           <ul>User: ${user.name}</ul>
-            <button type='button' class="create_quiz_button">Create Quiz</button>
+            <button type='button' class="create_quiz_button"><i class="fa-solid fa-plus fa-2xl"></i></button>
             <button type='button' class="my_quizzes_button">My Quizzes</button>
             <button type='button' class="logout_button">Log Out</button>
         </div>

@@ -13,15 +13,30 @@
 
 .sign-up_button {
   color: #FFFFFF;
-  background-color: #92a8d1;
+  color: #92a8d1;
   font-family: 'Zen Kaku Gothic Antique';
+  margin-top: 1em;
+}
+
+.sign-up_button:hover {
+
+  color: #ffecec;
+
 }
 
 .login_button {
   color: #FFFFFF;
-  background-color: #92a8d1;
+  // color: #92a8d1;
   font-family: 'Zen Kaku Gothic Antique';
+  font-size: large;
 }
+
+.login_button:hover {
+
+  color: #ffecec;
+
+}
+
 
 .login-signup {
   display: flex;
@@ -33,21 +48,30 @@
 
 .create_quiz_button {
   color: #FFFFFF;
-  background-color: #92a8d1;
+  // color: #92a8d1;
   font-family: 'Zen Kaku Gothic Antique';
+}
+
+.create_quiz_button:hover {
+
+  color: #92a8d1;
+
 }
 
 .my_quizzes_button {
   color: #FFFFFF;
-  background-color: #92a8d1;
   font-family: 'Zen Kaku Gothic Antique';
+  font-size: x-large;
+  font-weight: bolder;
 }
 
 .logout_button {
   color: #FFFFFF;
-  background-color: #92a8d1;
+  // color: #92a8d1;
   margin-right: 1em;
   font-family: 'Zen Kaku Gothic Antique';
+  font-size: x-large;
+  font-weight: bolder;
 }
 
 span.logo {

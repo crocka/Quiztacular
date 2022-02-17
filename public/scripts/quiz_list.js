@@ -24,7 +24,7 @@ $(() => {
     clearQuizzes();
     for (const quiz of quizzes) {
       // const quiz = quizzes[quizId];
-      const quizHtml = quizList.createQuiz(quiz,true);
+      const quizHtml = quizList.createQuiz(quiz, true);
       addQuiz(quizHtml);
     }
   }
@@ -35,27 +35,13 @@ $(() => {
 
     for (const quiz of quizzes) {
       // const quiz = quizzes[quizId];
-      const quizHtml = quizList.createQuiz(quiz,false);
+      const quizHtml = quizList.createQuiz(quiz, false);
       addQuiz(quizHtml);
     }
 
   }
 
   window.quizLists.addMyQuizzes = addMyQuizzes;
-
-  $('body').on('click','.fa-solid fa-share', function() {
-
-    let url = $(this).parent().attr('id');
-    alert('Share link copied to your clipboard.');
-
-    navigator.clipboard.writeText(`http://localhost:8080/quiz/${url}`)
-      .then(() => {
-
-        alert('Share link copied to your clipboard.');
-
-      })
-
-  });
 
 });
 
