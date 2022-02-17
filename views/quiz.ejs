@@ -26,14 +26,9 @@
 
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
-    <script type="text/javascript" src="/scripts/header.js"></script>
-    <script type="text/javascript" src="/scripts/login_form.js"></script>
+
     <script type="text/javascript" src="/scripts/network.js"></script>
-    <script type="text/javascript" src="/scripts/new_quiz.js"></script>
-    <script type="text/javascript" src="/scripts/quiz_list.js"></script>
-    <script type="text/javascript" src="/scripts/quiz.js"></script>
-    <script type="text/javascript" src="/scripts/signup_form.js"></script>
+
     <script type="text/javascript" src="/scripts/views_manager.js"></script>
     <script type="text/javascript" src="/scripts/quiz_page.js"></script>
 
@@ -44,6 +39,13 @@
 
   <header id="page-header">
     <h1></h1>
+    <nav id="page-header__user-links" class="page-header__user-links">
+      <span class='logo'>
+        <form action='/' method='GET'>
+          <button type="submit" class="btn">Quiztacular</button>
+        </form>
+      </span>
+    </nav>
   </header>
 
   <main id="main-content">

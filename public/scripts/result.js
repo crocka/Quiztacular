@@ -17,7 +17,10 @@ $(() => {
       const quizTitle = json.quiz;
       const score = json.score;
       // const started_at = json.started_at;
-      const completed_at = json.completed_at;
+      const completed_at_Array = json.completed_at.split('T');
+
+      const completed_at = completed_at_Array[0];
+
 
       // const $result = $(`
 
@@ -35,51 +38,68 @@ $(() => {
       <html>
     <head>
         <style type='text/css'>
+
+            #main-content {
+              margin: 5em;
+              font-family: 'Zen Kaku Gothic Antique';
+              display:flex;
+              justify-content: center;
+            }
+
             body, html {
                 margin: 0;
                 padding: 0;
             }
             body {
                 color: black;
-                display: table;
                 font-family: Georgia, serif;
                 font-size: 24px;
                 text-align: center;
+
             }
             .container {
-                border: 20px solid tan;
+                border: 5px solid #f7cac9;
                 width: 750px;
                 height: 563px;
                 display: table-cell;
                 vertical-align: middle;
+                background-image: url("https://www.transparenttextures.com/patterns/white-wall-3.png");
             }
-            .logo {
-                color: tan;
+            .certificatelogo {
+                color: #92a8d1;
+                margin-top: 3.5em;
+                font-weight: bold;
             }
 
             .marquee {
-                color: tan;
+                color: #92a8d1;
                 font-size: 48px;
                 margin: 20px;
             }
             .assignment {
                 margin: 20px;
+                color: #92a8d1;
+                font-weight: bold;
             }
             .person {
-                border-bottom: 2px solid black;
+                border-bottom: 2px solid 	#d0e1ff;
                 font-size: 32px;
                 font-style: italic;
                 margin: 20px auto;
                 width: 400px;
+                color: #92a8d1;
+                font-weight: bold;
             }
             .reason {
                 margin: 20px;
+                color: #92a8d1;
+                font-weight: bold;
             }
         </style>
     </head>
     <body>
         <div class="container">
-            <div class="logo">
+            <div class="certificatelogo">
               Congratulations, ${username}!
             </div>
 

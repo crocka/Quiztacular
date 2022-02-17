@@ -319,6 +319,7 @@ module.exports = (db) => {
 
               console.log('promise values', values)
               console.log({ "user_id": user_id, "quiz": quiz, "questions": questionsArray, "answers": values })
+              console.log(values[0]);
               res.send({ "user_id": user_id, "quiz": quiz, "questions": questionsArray, "answers": values });
 
             });

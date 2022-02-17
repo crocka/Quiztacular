@@ -7,8 +7,6 @@ $(() => {
 
   getMyDetails()
     .then(function (json) {
-      header.update(json.user);
-
 
       if (json.user) {
 
@@ -25,10 +23,109 @@ $(() => {
 
           // console.log("asdf", quiz)
 
+    //       const createQuizAnswerElement = function (answer) {
+
+    //         return `
+    //     <option value="${answer.id}">${answer.title}</option>
+    //     `;
+
+    //       };
+
+    //       const createQuizQuestionElement = function (question) {
+
+    //         return `
+    //     <article class='quiz-individual-questions'>
+    //      <h3>${question.title}</h3>
+    //      <div>
+    //        <select name='answer' id='answer-section-for-question${question.id}'>
+
+
+    //        </select>
+    //      </div>
+    //      </article>
+    //     `;
+
+    //       };
+
+    //       const $quiz = $(`
+
+
+    //   <form id="doing-quiz-form" class="doing-quiz-form">
+
+    //     <h1>
+    //       ${quiz.title}
+    //     </h1>
+
+    //     <h3>
+    //      ${quiz.description}
+    //     </h3>
+
+    //     <div class='question-wrapper' id='quiz${quiz.id}'>
+
+
+
+    //     </div>
+
+    //     <div class="quiz__field-wrapper">
+    //       <button type="submit" id="quiz_submit">Submit</button>
+    //     </div>
+
+    //   </form>
+    //  `);
+    //------------------------------------------------------------------------------------------------------//
+
+    //       const createQuizAnswerElement = function (answer) {
+    // //     <option value="${answer.id}">${answer.title}</option>
+    //         return `
+    //         <label class="options">${answer.title}<input type="radio" name="answer" value="${answer.id}"> <span class="checkmark"></span> </label>
+    //         `;
+    //       };
+
+    //       const createQuizQuestionElement = function (question) {
+
+    //             //     <article class='quiz-individual-questions'>
+    // //      <h3>${question.title}</h3>
+    // //      <div>
+    // //        <select name='answer' id='answer-section-for-question${question.id}'>
+
+
+    // //        </select>
+    // //      </div>
+    // //      </article>
+    //         return `
+    //         <div class="question ml-sm-5 pl-sm-5 pt-2" "quiz-individual-questions">
+    //     <div class="py-2 h5"><b>${question.title}</b></div>
+    //     <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="answer-section-for-question${question.id}"></div>
+    //        </div>
+    //         `;
+    //       };
+
+    //       const $quiz = $(`
+    //       <form id="doing-quiz-form" class="doing-quiz-form">
+    //       <h1>
+    //         ${quiz.title}
+    //       </h1>
+
+    //       <h3>
+    //         ${quiz.description}
+    //       </h3>
+
+    //       <div class="container mt-sm-5 my-1" id="quiz${quiz.id}">
+
+
+    //       </div>
+    //       <div class="quiz__field-wrapper">
+    //       <button type="submit" id="quiz_submit">Submit</button>
+    //     </div>
+    //       </form>
+    //       `);
+
+          // console.log('quizhtml' , $quiz);
+
           const createQuizAnswerElement = function (answer) {
 
             return `
-        <option value="${answer.id}">${answer.title}</option>
+            <input type="checkbox" name="answer" value="${answer.id}"><ul>${answer.title}</ul>
         `;
 
           };
@@ -38,11 +135,11 @@ $(() => {
             return `
         <article class='quiz-individual-questions'>
          <h3>${question.title}</h3>
-         <div>
-           <select name='answer' id='answer-section-for-question${question.id}'>
+         <span>
+           <div id='answer-section-for-question${question.id}'>
 
 
-           </select>
+           </span>
          </div>
          </article>
         `;
@@ -74,8 +171,6 @@ $(() => {
 
       </form>
      `);
-
-          // console.log('quizhtml' , $quiz);
 
           window.$quiz = $quiz;
           $('#main-content').append($quiz);
@@ -115,7 +210,7 @@ $(() => {
             createUserAnswer(answers)
               .then(result => {
 
-                // console.log('quizpage', result);
+                console.log('quizpage', result);
                 window.location.replace(`http://localhost:8080/result/${result.user_id}_${result.id}`);
 
               })

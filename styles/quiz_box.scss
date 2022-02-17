@@ -8,6 +8,8 @@
   margin: 1em;
   padding: 1em;
   font-family: 'Zen Kaku Gothic Antique';
+  color:	#92a8d1;
+  background-image: url("https://www.transparenttextures.com/patterns/skulls.png");
 
 }
 
@@ -30,4 +32,34 @@
 .container {
   display: flex;
   justify-content: center;
+}
+
+#shareButtonResult {
+  color: #92a8d1;
+}
+
+#quiz_submit {
+  color: #92a8d1;
+}
+
+// .new-quiz-form {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   margin-top:  10em;
+//   font-family: 'Zen Kaku Gothic Antique';
+// }
+
+.shareButtonQuiz {
+  display: flex;
+  justify-content: between;
+  padding-top: 5px;
+}
+
+.share {
+  justify-content: flex-end;
+  display: flex;
+  align-items: flex-end;
+  padding-top: 10em;
 }

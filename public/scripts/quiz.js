@@ -6,6 +6,10 @@ $(() => {
 
     // getMyDetails()
     // .then((j) => {
+
+      let dateArray = quiz.created_at.split('T');
+      let date = dateArray[0];
+
       let difficulty;
 
       if (quiz.level_of_difficulty === 1) {
@@ -28,7 +32,7 @@ $(() => {
         <h3 class="quiz_subject">${quiz.subject}</h3>
          <h3>${difficulty}</h3>
          <h3 class='isHiddenTag'>${quiz.is_hidden ? 'Hidden' : ''}</h3>
-         <h3> Created on: ${quiz.created_at}</h3>
+         <h3> Created on: ${date}</h3>
         </header>
 
         <body>${quiz.description}</body>
@@ -42,7 +46,7 @@ $(() => {
           </button>
 
         </form>
-        <span id='/quiz/${quiz.id}'>
+        <span id='/quiz/${quiz.id}' class='share'>
           <button class="shareButtonQuiz">
             <i id='shareButton${quiz.id}' class="fa-solid fa-share"></i>
           </button>

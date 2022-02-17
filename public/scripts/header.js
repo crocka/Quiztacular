@@ -36,7 +36,7 @@ $(() => {
       </form>
       </span>
         <div>
-          <ul>User: ${user.name}</ul>
+          <ul>Hello, ${user.name}</ul>
             <button type='button' class="create_quiz_button"><i class="fa-solid fa-plus fa-2xl"></i></button>
             <button type='button' class="my_quizzes_button">My Quizzes</button>
             <button type='button' class="logout_button">Log Out</button>
