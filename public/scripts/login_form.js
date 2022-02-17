@@ -12,7 +12,9 @@ $(() => {
         </div>
 
       <div class="login-form__field-wrapper">
+        <form action='/' method='GET'>
           <button>Login</button>
+        </form>
           <a id="login-form__cancel" href="#">Cancel</a>
       </div>
     </form>

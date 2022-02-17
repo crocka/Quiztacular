@@ -5,7 +5,12 @@ $(() => {
 
   const result_id = result_id_array[result_id_array.length - 1];
 
-  getResult(result_id)
+
+  getMyDetails()
+  .then(function (j) {
+    header.update(j.user);
+
+    getResult(result_id)
     .then((json) => {
 
       // { "username": user.name, "quiz": quiz.title, "score": result.score, "started_at": result.started_at, "completed_at": result.completed_at }
@@ -45,4 +50,8 @@ $(() => {
 
 
     })
+
+  })
+  .catch(err => console.log(err));
+
 });

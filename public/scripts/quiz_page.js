@@ -5,28 +5,35 @@ $(() => {
 
   const quiz_id = Number(quiz_id_array[quiz_id_array.length - 1]);
 
-  getQuiz(quiz_id)
-    .then(json => {
-      // console.log('res' , json);
+  getMyDetails()
+    .then(function (json) {
+      header.update(json.user);
 
-      const userId = json.user_id;
-      const quiz = json.quiz;
-      const questionsArray = json.questions;
-      const answersArray = json.answers;
 
-      // console.log("asdf", quiz)
+      if (json.user) {
 
-      const createQuizAnswerElement = function (answer) {
+        getQuiz(quiz_id)
+        .then(json => {
+          // console.log('res' , json);
 
-        return `
+          const userId = json.user_id;
+          const quiz = json.quiz;
+          const questionsArray = json.questions;
+          const answersArray = json.answers;
+
+          // console.log("asdf", quiz)
+
+          const createQuizAnswerElement = function (answer) {
+
+            return `
         <option value="${answer.id}">${answer.title}</option>
         `;
 
-      };
+          };
 
-      const createQuizQuestionElement = function (question) {
+          const createQuizQuestionElement = function (question) {
 
-        return `
+            return `
         <article class='quiz-individual-questions'>
          <h3>${question.title}</h3>
          <div>
@@ -38,9 +45,9 @@ $(() => {
          </article>
         `;
 
-      };
+          };
 
-      const $quiz = $(`
+          const $quiz = $(`
 
       <form id="new-quiz-form" class="new-quiz-form">
         <h1>
@@ -63,54 +70,69 @@ $(() => {
       </form>
      `);
 
-      // console.log('quizhtml' , $quiz);
+          // console.log('quizhtml' , $quiz);
 
-      window.$quiz = $quiz;
-      $('#main-content').append($quiz);
-
-
-      for (let question of questionsArray) {
+          window.$quiz = $quiz;
+          $('#main-content').append($quiz);
 
 
-        $(`#quiz${quiz.id}`).append(createQuizQuestionElement(question));
+          for (let question of questionsArray) {
 
 
-      };
-
-      for (let answers of answersArray) {
-
-        for(let answer of answers) {
-
-          $(`.quiz-individual-questions #answer-section-for-question${answer.question_id}`).append(createQuizAnswerElement(answer));
-
-        }
-      };
-
-      $quiz.on('submit', function (event) {
-
-        event.preventDefault();
-
-        // console.log($(this));
-        let answers = $(this).serialize();
-        // answers.quiz_id = quiz_id;
-        answers = `quizId=${quiz_id}&` + answers;
-
-        // const data = {quiz_id: quiz_id, answers};
-
-        // console.log($(this));
-        console.log(answers)
-        // createQuiz(data)
-        createUserAnswer(answers)
-          .then(result => {
-
-            console.log('quizpage',result);
-            window.location.replace(`http://localhost:8080/result/${result.user_id}_${result.id}`);
-
-          })
-          .catch(err => console.log(err));
+            $(`#quiz${quiz.id}`).append(createQuizQuestionElement(question));
 
 
-      });
+          };
+
+          for (let answers of answersArray) {
+
+            for (let answer of answers) {
+
+              $(`.quiz-individual-questions #answer-section-for-question${answer.question_id}`).append(createQuizAnswerElement(answer));
+
+            }
+          };
+
+          $quiz.on('submit', function (event) {
+
+            event.preventDefault();
+
+            // console.log($(this));
+            let answers = $(this).serialize();
+            // answers.quiz_id = quiz_id;
+            answers = `quizId=${quiz_id}&` + answers;
+
+            // const data = {quiz_id: quiz_id, answers};
+
+            // console.log($(this));
+            console.log(answers)
+            // createQuiz(data)
+            createUserAnswer(answers)
+              .then(result => {
+
+                console.log('quizpage', result);
+                window.location.replace(`http://localhost:8080/result/${result.user_id}_${result.id}`);
+
+              })
+              .catch(err => console.log(err));
+
+
+
+
+          });
+
+
+
+        });
+
+      } else {
+
+        views_manager.show('logIn');
+
+      }
+
 
     });
+
+
 })
