@@ -23,21 +23,17 @@ module.exports = (db) => {
 
   router.get("/me", (req, res) => {
     const userId = req.session.userId;
-    console.log('/users/me', userId)
     if (!userId) {
       res.send({ message: "not logged in" });
       return;
     }
 
-    // console.log(userId)
     db.getUserWithId(userId)
       .then(user => {
         if (!user) {
           res.send({ error: "no user with that id" });
           return;
         }
-
-        console.log('user/me', { user: { name: user.name, email: user.email, id: userId } })
         res.send({ user: { name: user.name, email: user.email, id: userId } });
       })
       .catch(e => res.send(e));
@@ -78,7 +74,5 @@ module.exports = (db) => {
     req.session.userId = null;
     res.send({});
   });
-
-
   return router;
 };

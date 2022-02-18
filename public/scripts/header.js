@@ -44,9 +44,7 @@ $(() => {
       </nav>
       `
     }
-
     $pageHeader.append(userLinks);
-
   }
 
   window.header.update = updateHeader;
@@ -59,10 +57,8 @@ $(() => {
   $("header").on('click', '.login_button', () => {
     console.log('clicked')
     views_manager.show('logIn');
-
     //slidown login_form
     $('#login_form').is(':hidden') ? $('#login_form').slideDown() : $('#login_form').slideUp();
-
   });
 
   $("header").on('click', '.sign-up_button', () => {
@@ -70,27 +66,17 @@ $(() => {
     views_manager.show('registration');
     //slidown sign-up_form
     $('#signup_form').is(':hidden') ? $('#signup_form').slideDown() : $('#signup_form').slideUp();
-
   });
 
   $("header").on('click', '.create_quiz_button', () => {
-
     views_manager.show('new_quiz');
-
   });
 
   $("header").on('click', '.my_quizzes_button', () => {
-
-    //show quiz list
-
     getMyQuizzes()
       .then(json => {
-
         quizLists.addMyQuizzes(json);
-        // views_manager.show('quiz_list');
-
       })
-
   });
 
   $("header").on('click', '.logout_button', () => {
@@ -98,5 +84,4 @@ $(() => {
       header.update(null);
     });
   });
-
 });

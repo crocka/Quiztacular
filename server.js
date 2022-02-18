@@ -13,15 +13,7 @@ app.use(cookieSession({
   name: 'session',
   keys: ['key1']
 }));
-// PG database client/connection setup
-// const { Pool } = require("pg");
-// const dbParams = require("./lib/db.js");
-// const db = new Pool(dbParams);
-// db.connect();
 
-// Load the logger first so all (static) HTTP requests are logged to STDOUT
-// 'dev' = Concise output colored by response status for development use.
-//         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan("dev"));
 
 app.set("view engine", "ejs");
@@ -51,66 +43,10 @@ app.use("/users", usersRoutes(db));
 app.use("/api", apisRoutes(db));
 app.use("/quiz", quizRoutes(db));
 app.use("/result", resultRoutes(db));
-// Note: mount other resources here, using the same pattern above
-
-// Home page
-// Warning: avoid creating more routes in this file!
-// Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
   res.render("index");
 });
-
-// app.get("/quiz/:quizId", (req, res) => {
-
-//   const quiz_id = req.params.quizId;
-//   let questionsArray = [];
-
-//   let quiz;
-
-//   db.getQuizWithQuizId(quiz_id).then(q => quiz = q);
-
-//   db.getQuestionsWithQuizId(quiz_id)
-//   .then(questions => {
-
-//     let answersArray = {};
-
-//     questions.forEach(x => {
-
-//       db.getAnswersWithQuestionId(x.id)
-//         .then(answers => {
-//           // console.log(answers.length)
-//           // x.answers = answers;
-//           answersArray[`questions${x.id}`] = answers;
-//           // res.send({questions, answers});
-
-//         })
-//     });
-//     questionsArray = questions;
-//     return answersArray;
-//     console.log(answersArray[`questions${questions[0].id}`])
-//     // console.log('sfd'+answersArray)
-
-
-
-//   })
-//   .then((answersArray) => {
-
-//     res.send({"questions": questionsArray, "answers":answersArray});
-//   })
-//   .catch(err => console.log(err.message));
-
-// });
-
-// app.get("/results/:resultId", (req, res) => {
-
-//   const result_id = req.params.resultId;
-
-//   db.getResult(result_id)
-//     .then(result => res.send(result))
-//     .catch((err) => console.log(err.message));
-
-// });
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

@@ -3,10 +3,6 @@ $(() => {
   window.quizList = {};
 
   function createQuiz(quiz,public) {
-
-    // getMyDetails()
-    // .then((j) => {
-
       let dateArray = quiz.created_at.split('T');
       let date = dateArray[0];
 
@@ -56,12 +52,6 @@ $(() => {
 
       </article>
       `;
-
-
-    // })
-    // .catch(err => console.log(err));
-
-
   };
 
   window.quizList.createQuiz = createQuiz;

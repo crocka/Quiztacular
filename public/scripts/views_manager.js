@@ -8,7 +8,6 @@ $(() => {
     $newQuizForm.detach();
     $quizLists.detach();
     $logInForm.detach();
-    // $quiz.detach();
     $signUpForm.detach();
 
     switch (item) {

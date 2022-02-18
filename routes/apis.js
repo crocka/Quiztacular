@@ -5,25 +5,6 @@ const { user } = require('pg/lib/defaults');
 const router = express.Router();
 
 module.exports = (db) => {
-
-  // //get questions and answers with quiz id
-  // router.get("/:quizId", (req, res) => {
-
-  //   const quizId = req.params.quizId;
-
-  //   db.getQuestionsWithQuizId
-  //     .then(data => {
-  //       const widgets = data.rows;
-  //       res.json({ widgets });
-  //     })
-  //     .catch(err => {
-  //       res
-  //         .status(500)
-  //         .json({ error: err.message });
-  //     });
-  // });
-
-  // all quizzes for main page
   router.get('/', (req, res) => {
 
     db.getAllQuizzes()
@@ -53,25 +34,14 @@ module.exports = (db) => {
 
   });
 
-  // all results of a user
-
-
-
-
-
   // update user_answer
   router.post('/user_answer', (req, res) => {
 
     const user_id = req.session.userId;
     const quiz_id = req.body.quizId;
     let answers = req.body.answer;//array of answers.id
-    // const quiz_id = req.body.quiz_id;
 
     console.log('/api/user_answer',req.body);
-    // console.log(user_id);
-
-    // const UserAnswer = new Promise((resolve, reject) => {
-
     async function execute() {
 
       let attempt = await db.getUserAttempt(user_id, quiz_id);
@@ -79,14 +49,11 @@ module.exports = (db) => {
       if (!Array.isArray(answers)) {
         answer.push(answers);
         answers = answer;
-        console.log('api user_answer', answers)
       }
-      // console.log('api attempt',attempt)
       for (let x of answers) {
 
         db.addUserAnswer(user_id, x, attempt);
-        // .then(data => res.send(data))
-        // .catch(err => console.log(err.message));
+
       };
 
       const num = await db.getNumberOfQuestions(quiz_id);
@@ -100,31 +67,9 @@ module.exports = (db) => {
       .then(result => {
 
         res.send(result);
-        // res.redirect(200, `http://localhost:8080/result/${user_id}_${result.id}`);
 
       })
   });
-  // db.getNumberOfQuestions(quiz_id)
-  //   .then((num) => {
-
-  //     db.getScore(user_id, quiz_id, num.count)
-  //       .then((score) => {
-
-
-  // db.addResult(user_id, quiz_id, score, started_at)
-
-
-  // });
-
-  // UserAnswer
-  //   .then(() => {
-
-
-  // })
-
-
-
-
 
   // update quiz in creating new quizzes
   router.post('/newQuiz', (req, res) => {
@@ -133,7 +78,6 @@ module.exports = (db) => {
     let quiz_id;
     const user_id = req.session.userId;
     const data = req.body; //one quiz object
-    // let questions = [];
 
     const quiz = {
 
@@ -145,16 +89,11 @@ module.exports = (db) => {
       "description": data.quiz_description
 
     };
-    // console.log("api/newQuiz " + quiz)
 
     db.addQuiz(quiz)
       .then(data => {
 
         quiz_id = data.id;
-        console.log(data,'api/newQuiz');
-        // res.send(data);
-
-
       })
       .then(() => {
 
@@ -174,14 +113,10 @@ module.exports = (db) => {
 
           for (let i = 0; i < question_title.length; i++) {
 
-            // console.log('hi:' + data.question_title[i]);
-
             let question = {
               "quiz_id": quiz_id,
               "title": question_title[i]
             };
-
-            // console.log('hi2:' + question);
 
             await db.addQuestion(question)
               .then(question => {
@@ -205,15 +140,10 @@ module.exports = (db) => {
                       "title": data[`question${i}_answer`][j],
                       "is_correct": answerCorrectArray[j]
                     };
-
-                    console.log(answer.question_id)
-                    console.log(answer.title)
-                    console.log(answer.is_correct)
                     db.addAnswer(answer);
 
                   };
 
-                  // res.send('ok');
 
                 } else {
 
@@ -230,56 +160,17 @@ module.exports = (db) => {
                     "title": data[`question${i}_answer`],
                     "is_correct": answerCorrectArray[0]
                   };
-
-                  console.log(answer,'api/newQuiz')
                   db.addAnswer(answer);
-                  // res.send('ok');
-
 
                 }
-
-
-
               })
-
-              // res.send('ok');
           }
-
           res.send('ok');
-
-
         };
         addQuestionAnswer();
 
       })
       .catch(err => console.log('1234:' + err.message));
-
-    // answers.forEach(x => {
-    //
-    //   .then(data => res.send(data))
-    //   .catch(err => console.log(err.message));
-
-    // });
-
-    // .then(() => {
-
-    //   for (let i = 0; i < data.question_title.length; i++) {
-
-    //     // console.log('hi:' + data.question_title[i]);
-
-    //     let answer = {
-    //       "question_id": quiz_id,
-    //       "title": data.question_title[i]
-    //     };
-
-    //     // console.log('hi2:' + question);
-
-    //     db.addAnswer(answer);
-
-    //   };
-
-    // })
-
   });
 
   router.get("/quiz/:quizId", (req, res) => {
@@ -287,16 +178,6 @@ module.exports = (db) => {
     const quiz_id = Number(req.params.quizId.replace('?',''));
     const user_id = req.session.userId;
     let questionsArray = [];
-    // let answersArray = {};
-    // let quiz;
-
-    console.log(req.params)
-
-    // if(typeof quiz_id != 'number') {
-
-    //   res.send("NaN error!");
-
-    // } else {
 
       db.getQuizWithQuizId(quiz_id)
       .then(q => {
@@ -306,30 +187,14 @@ module.exports = (db) => {
           .then(questions => {
 
             questionsArray = questions;
-            // console.log('qA' + questionsArray)
             let promisesArray = [];
 
-            console.log('let me see', questions)
             for (let x of questions) {
 
               promisesArray.push(db.getAnswersWithQuestionId(x.id));
-              // .then(answers => {
-              //   // console.log(answers)
-              //   // x.answers = answers;
-              //   // answersArray.push(answers);
-              //   answersArray[`question${x.id}`] = answers;
-              //   // console.log(answersArray[`question${x.id}`]);
-              //   // res.send({questions, answers});
-
-              // })
             }
 
-            console.log(promisesArray, 'promise all')
             Promise.all(promisesArray).then((values) => {
-
-              console.log('promise values', values)
-              console.log({ "user_id": user_id, "quiz": quiz, "questions": questionsArray, "answers": values })
-              console.log(values[0]);
               res.send({ "user_id": user_id, "quiz": quiz, "questions": questionsArray, "answers": values });
 
             });
@@ -338,14 +203,6 @@ module.exports = (db) => {
 
       })
       .catch(err => console.log(err.message));
-
-
-    // }
-
-
-
-    // setTimeout(() => {res.send({ "questions": questionsArray, "answers": answersArray })}, 1000);
-
   });
 
   router.get("/result/:userId_resultId", (req, res) => {
@@ -383,11 +240,3 @@ module.exports = (db) => {
 
   return router;
 };
-
-
-
-// /Users
-// /API QUIZZES THAT BELONG TO A user
-// /QUIZ TO A SPECIFIC QUIZ
-// /results/RESULTSID
-// /QUIZ/:QUIZID
