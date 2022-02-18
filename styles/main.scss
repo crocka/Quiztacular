@@ -79,3 +79,7 @@ select {
   height:1.5em;
 }
 
+input:checked + span {
+
+  font-weight: bold;
+}
