@@ -49,10 +49,10 @@ body {
   justify-content: center;
 }
 
-#create-quiz-section {
-  display: flex;
-  justify-content: center;
-  font-size: x-large;
+#new-quiz-form {
+  border: 2px solid black;
+  padding: 50px;
+
 }
 
 input {
@@ -63,7 +63,19 @@ input {
   border-bottom-color: 1px #252e41;
   height:1.5em;
   word-wrap: break-word;
+  margin-top: 2em;
+
   outline: none;
 
 
 }
+
+select {
+
+  background-color: transparent;
+  border-width: 0;
+  border-bottom-width: thin;
+  border-bottom-color: 1px #252e41;
+  height:1.5em;
+}
+

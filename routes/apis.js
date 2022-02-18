@@ -213,6 +213,8 @@ module.exports = (db) => {
 
                   };
 
+                  res.send('ok');
+
                 } else {
 
                   let answerCorrectArray = data[`question${i}answer_is_correct`];
@@ -231,9 +233,12 @@ module.exports = (db) => {
 
                   console.log(answer,'api/newQuiz')
                   db.addAnswer(answer);
+                  res.send('ok');
 
 
                 }
+
+                // res.send('ok');
 
               })
           }
@@ -241,6 +246,7 @@ module.exports = (db) => {
 
         };
         addQuestionAnswer();
+
       })
       .catch(err => console.log('1234:' + err.message));
 

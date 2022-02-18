@@ -135,20 +135,18 @@ $(() => {
             return `
         <article class='quiz-individual-questions'>
          <h3>${question.title}</h3>
-         <span>
+          <span>
            <div id='answer-section-for-question${question.id}'>
-
-
-           </span>
+          </span>
          </div>
+         <div class='divider'></div>
+
          </article>
         `;
 
           };
 
-          const $quiz = $(`
-
-
+      const $quiz = $(`
       <form id="doing-quiz-form" class="doing-quiz-form">
 
         <h1>
@@ -159,9 +157,10 @@ $(() => {
          ${quiz.description}
         </h3>
 
+        <div class='divider'></div>
+
+
         <div class='question-wrapper' id='quiz${quiz.id}'>
-
-
 
         </div>
 

@@ -33,13 +33,19 @@ $(() => {
         <label>Correct answer</label><br></br>
      </article>
 
+
+
     </div>
 
     <div class="add_answer">
-      <a button type="button" class="add_button">Add another answer<button>
+      <a button type="button" class="add_button"><span>Add another answer</span></a>
     </div>
 
+
+
   </article>
+
+  <div class='separator'></div>
     `;
   };
   const $newQuizForm = $(`
@@ -60,7 +66,7 @@ $(() => {
       <label>Do you want your quiz to be private?</label><br></br>
 
       <div class="dropdown">
-        <label class="dropbtn">Set difficulty level</label>
+        <label class="dropbtn">Set difficulty level: </label>
         <select class="dropdown-difficulty"  id='quiz_level_of_difficulty' name='quiz_level_of_difficulty'>
           <option value='1'>Easy</option>
           <option value='2'>Medium</option>
@@ -69,7 +75,7 @@ $(() => {
       </div>
 
       <div class="dropdown">
-        <label class="dropbtn">Subject</label>
+        <label class="dropbtn">Subject: </label>
         <select class="dropdown-subject" id='quiz_subject' name='quiz_subject'>
           <option>Math</option>
           <option>Biology</option>
@@ -204,18 +210,20 @@ $(() => {
           </div>
 
           <div class="add_answer">
-            <a button type="button" class="add_button">Add another answer<button>
+            <a button type="button" class="add_button"><span>Add another answer</span></a>
           </div>
+
+          <div class='separator'></div>
 
         </article>
       </div>
 
       <div class="add_question">
-        <a button type="button" class="add_button">Add another question<button>
+        <a button type="button" class="add_button"><span>Add another question</span></a>
       </div>
 
       <div class="new-quiz-form__field-wrapper">
-        <button type="submit" id="new-quiz-form_create">Create!</button>
+        <button type="submit" id="new-quiz-form_create">Create</button>
         <a id="new-quiz-form_cancel" href="#">Cancel</a>
       </div>
 
@@ -278,12 +286,25 @@ $(() => {
     const data = $(this).serialize();
     // console.log($(this).val());
     console.log('newquiz', data)
-    createQuiz(data)
-      .then((data) => {
-        views_manager.show('quiz_list');
+
+    async function create() {
+
+
+      await createQuiz(data)
+
+      $.get('/', () => {
+
+
+        window.location = 'http://localhost:8080/'
         alert('New Quiz Created!');
+
+
       })
-      .catch(err => console.log(err.message));
+
+
+    };
+
+    create();
 
 
     // .then(data => console.log('new_quiz', data))

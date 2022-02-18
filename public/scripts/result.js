@@ -63,7 +63,8 @@ $(() => {
                 height: 563px;
                 display: table-cell;
                 vertical-align: middle;
-                background-image: url("https://www.transparenttextures.com/patterns/white-wall-3.png");
+                background-image: url("https://www.transparenttextures.com/patterns/groovepaper.png");
+
             }
             .certificatelogo {
                 color: #92a8d1;
