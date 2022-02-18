@@ -213,7 +213,7 @@ module.exports = (db) => {
 
                   };
 
-                  res.send('ok');
+                  // res.send('ok');
 
                 } else {
 
@@ -233,15 +233,19 @@ module.exports = (db) => {
 
                   console.log(answer,'api/newQuiz')
                   db.addAnswer(answer);
-                  res.send('ok');
+                  // res.send('ok');
 
 
                 }
 
-                // res.send('ok');
+
 
               })
+
+              // res.send('ok');
           }
+
+          res.send('ok');
 
 
         };
