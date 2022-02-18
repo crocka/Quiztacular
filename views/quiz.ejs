@@ -39,13 +39,13 @@
       background-color: aquamarine;
     }
 
-    /* input {
+    input {
       position: absolute;
       opacity: 0;
       cursor: pointer;
       height: 0;
       width: 0;
-    } */
+    }
 
     .answer:hover {
 
@@ -53,11 +53,21 @@
 
     }
 
-    input[type=checkbox]:checked{
+    /* input[type=checkbox]:checked ~ * .answer{
 
-      box-shadow: 0 0 0 3px hotpink;background-color: red;
+      /* content: "f00c"; */
+    /* background-color: aqua;
+      box-shadow: 0 0 0 3px hotpink;
 
+    } */
+
+    :checked + span {
+
+      /* background-color: red; */
+      font-weight: bold;
     }
+
+
 
     /* input+label:before {
 
@@ -68,7 +78,6 @@
       background-color: brown;
       box-shadow: 0 0 0 3px hotpink;
     } */
-
   </style>
 
 

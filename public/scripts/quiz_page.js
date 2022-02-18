@@ -125,12 +125,12 @@ $(() => {
           const createQuizAnswerElement = function (answer) {
 
             return `
-            <div>
+            <ul>
             <label class='answer'>
-            ${answer.title}
             <input type="checkbox" name="answer" value="${answer.id}">
+            <span>${answer.title}</span>
             </label>
-            </div>
+            </ul>
         `;
 
           };
