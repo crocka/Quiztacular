@@ -381,6 +381,35 @@ module.exports = (db) => {
 
   });
 
+  router.get("/result/:userId", (req, res) => {
+
+    const userId = req.params.userId;
+
+    db.getResult(resultId)
+      .then((result) => {
+
+        db.getUserWithId(userId)
+          .then(user => {
+
+
+            db.getQuizWithQuizId(result.quiz_id)
+              .then(quiz => {
+
+                console.log('/api/result',{ "username": user.name, "quiz": quiz.title, "score": result.score, "completed_at": result.completed_at })
+
+                res.send({ "username": user.name, "quiz": quiz.title, "score": result.score, "completed_at": result.completed_at });
+
+              })
+
+          })
+
+      })
+
+
+  });
+
+  
+
   return router;
 };
 
