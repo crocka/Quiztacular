@@ -54,7 +54,6 @@ const getResult = function(userId_resultId) {
 
 
 function getMyDetails() {
-  console.log("getMyDetails");
   return $.ajax({
     method: "GET",
     url: "/users/me",
@@ -62,7 +61,6 @@ function getMyDetails() {
 }
 
 const createQuiz = function(data) {
-  // console.log('network',data);
   return $.ajax({
     method: "POST",
     url: "/api/newQuiz",
@@ -72,8 +70,6 @@ const createQuiz = function(data) {
 
 
 const createUserAnswer = function(data) {
-
-  console.log('network', data)
   return $.ajax({
     method: "POST",
     url: "/api/user_answer",

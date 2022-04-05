@@ -254,11 +254,8 @@ $(() => {
 
   $('body').on("click", ".add_answer", function (event) {
     event.preventDefault();
-    // console.log($(this).parent('.individual_question').attr('id'))
 
     const question_num = $(this).parent('.individual_question').attr('id');
-
-    // console.log('this is:' + question_num)
 
     $(`#${question_num} .individual_answer`).append(createAnswerElement(question_num));
 
@@ -268,7 +265,6 @@ $(() => {
     event.preventDefault();
 
     question_number++;
-    // console.log(question_number)
     $('.question_list').append(createQuestionElement());
 
   });
@@ -282,10 +278,7 @@ $(() => {
 
     event.preventDefault();
 
-    // console.log($(this));
     const data = $(this).serialize();
-    // console.log($(this).val());
-    console.log('newquiz', data)
 
     async function create() {
 
@@ -293,21 +286,11 @@ $(() => {
       await createQuiz(data)
 
       $.get('/', () => {
-
-
         window.location = 'http://localhost:8080/'
         alert('New Quiz Created!');
-
-
       })
-
-
     };
-
     create();
-
-
-    // .then(data => console.log('new_quiz', data))
   });
 
 });

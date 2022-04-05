@@ -28,7 +28,6 @@ $(() => {
     event.preventDefault();
 
     const data = $(this).serialize();
-    console.log(data)
     signUp(data)
       .then(getMyDetails)
       .then((json) => {
