@@ -1,5 +1,6 @@
-LHL Node Skeleton
+Quiztacular
 =========
+Quiztacular allows users to create, share, and complete quizzes of a variety of topics. Users can share the link of a specific quiz, as well as share the link to a specific quiz attempt result. The user authentication is powered by bcrypt library. The frontend is implemented with jQuery and Ajax libraries for API and event management, and the backend API management is implemented with express server library and PostgreSQL.
 
 ## Project Setup
 
